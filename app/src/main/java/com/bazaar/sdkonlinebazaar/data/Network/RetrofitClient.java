@@ -60,7 +60,7 @@ public class RetrofitClient {
 
 
 
-        @GET("Main/getPersionInfo")
+        @GET("Main/GetAllPerson")
         Call<List<PersionResponse>> getPersionInfo();
 
         @POST("Main/CreatePerson")

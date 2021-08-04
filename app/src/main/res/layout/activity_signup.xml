@@ -56,6 +56,38 @@
                 android:inputType="text" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/linearLayout_password_container7"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radio"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_with_grey_border"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioMale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radioFemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/linearLayout_password_container6"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -65,6 +97,7 @@
             <EditText
                 android:id="@+id/Mobile"
                 style="@style/LoginEditText"
+
                 android:layout_weight="0.5"
                 android:hint="Mobile"
                 android:inputType="text" />
@@ -97,6 +130,41 @@
                 android:layout_weight="0.5"
                 android:hint="Education"
                 android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container8"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radio1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_with_grey_border"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioJob"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job"
+                    android:checked="true" />
+
+                <RadioButton
+                    android:id="@+id/radioFood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Food" />
+                <RadioButton
+                    android:id="@+id/radioMarriageBureau"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Marriage Bureau" />
+
+
+            </RadioGroup>
         </LinearLayout>
         <LinearLayout
             android:id="@+id/linearLayout_password_container2"

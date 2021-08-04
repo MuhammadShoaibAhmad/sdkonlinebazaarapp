@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.bazaar.sdkonlinebazaar.R;
 import com.bazaar.sdkonlinebazaar.constants.Constants;
@@ -27,6 +30,8 @@ public class SignupActivity extends AppCompatActivity {
     private PersionResponse per=new PersionResponse();
     private Button signup;
     private EditText Name, FatherName,Mobile,Profession,Education,Email,Password;
+    private RadioGroup radioGender,radioModules;
+    private RadioButton radioButtonGender,radioButtonModules;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +59,16 @@ public class SignupActivity extends AppCompatActivity {
         Email = findViewById(R.id.Email);
         Password = findViewById(R.id.Password);
 
+        radioGender = findViewById(R.id.radio);
+        radioModules = findViewById(R.id.radio1);
+
+
     }
 
 
     public void persionSignUp(View view) {
+
+
 
         per.setName(Name.getText().toString());
         per.setFatherName(FatherName.getText().toString());
@@ -65,7 +76,29 @@ public class SignupActivity extends AppCompatActivity {
         per.setProfession(Profession.getText().toString());
         per.setEducation(Education.getText().toString());
         per.setEmail(Email.getText().toString());
+        per.setLoginName(Email.getText().toString());
         per.setPassword(Password.getText().toString());
+
+        // get selected radio button from radioGroup
+        int selectedId = radioGender.getCheckedRadioButtonId();
+        int moduleId = radioModules.getCheckedRadioButtonId();
+      // find the radiobutton by returned id
+        radioButtonGender =  findViewById(selectedId);
+        radioButtonModules =  findViewById(moduleId);
+        String gender=  (radioButtonGender.getText().toString());
+        String module=  (radioButtonModules.getText().toString());
+        if(gender.contains("Male")){
+            per.setGenderID(1);
+        }else{
+            per.setGenderID(2);
+        }
+        if(module.contains("Job")){
+            per.setModuleID(1);
+        }else if(module.contains("Food")){
+            per.setModuleID(2);
+        }else {
+            per.setModuleID(3);
+        }
 
 
         progressDialog.showProgressDialog();
@@ -104,4 +137,6 @@ public class SignupActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

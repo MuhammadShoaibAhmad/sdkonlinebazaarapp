@@ -24,8 +24,8 @@
                 android:layout_marginStart="10.0dip"
                 android:layout_marginLeft="10.0dip"
                 android:adjustViewBounds="true"
-                android:visibility="visible"
-                android:src="@drawable/close_drawer_ic" />
+                android:src="@drawable/close_drawer_ic"
+                android:visibility="visible" />
 
             <RelativeLayout
                 android:id="@+id/sort_engine_layout"
