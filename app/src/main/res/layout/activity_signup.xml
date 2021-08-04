@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_login_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/material_grey200">
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout_buttons_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32.0dip"
+        android:layout_marginTop="20.0dip"
+        android:layout_marginRight="32.0dip"
+        android:layout_marginBottom="32.0dip"
+        android:background="@color/material_black"
+        android:orientation="vertical"
+        android:paddingStart="16.0dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <!-- android:background="@color/primary"-->
+        <LinearLayout
+            android:id="@+id/linearLayout_inputs"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="2.0"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Name"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Name"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/FatherName"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="FatherName"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container6"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Mobile"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Mobile"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Profession"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Profession"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Education"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Education"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Email"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Password"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Password"
+                android:inputType="textPassword" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_powered_by"
+        style="@style/SignUpBottomTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Back To?"
+        android:onClick="gotoLoginActivity"
+        android:clickable="true"
+        android:textColor="@color/material_grey700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView_gpswox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_gpswox"
+        style="@style/SignUpBottomTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4.0dip"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Login"
+        android:onClick="gotoLoginActivity"
+        android:clickable="true"
+        android:textColor="@color/primary"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_powered_by"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView_powered_by"
+        app:layout_constraintTop_toTopOf="@+id/textView_powered_by" />
+
+
+    <Button
+        android:id="@+id/signup"
+        style="@style/SignInButton"
+        android:layout_width="0.0dip"
+        android:layout_marginTop="24.0dip"
+        android:layout_weight="1.0"
+        android:onClick="persionSignUp"
+        android:text="Sign Up"
+
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_buttons_container" />
+
+    <Button
+        android:id="@+id/register"
+        style="@style/SignInButton"
+        android:layout_width="0.0dip"
+        android:layout_marginTop="16.0dip"
+        android:layout_weight="1.0"
+        android:text="@string/signIn"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_buttons_container" />
+
+    <!--  <ProgressBar
+          android:id="@+id/am_progressBar"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:visibility="gone"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

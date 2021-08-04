@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sliding_navigation"
+    android:layout_width="fill_parent"
+    android:layout_height="40.0dip"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@+id/close_sliding_icon_layout"
+        android:background="@android:color/white"
+        android:weightSum="3.0">
+
+        <ImageView
+            android:id="@+id/map_navigation_button"
+            android:layout_width="0.0dip"
+            android:onClick="centerallmarkers"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sliding_out_map_icon" />
+
+        <ImageView
+            android:id="@+id/object_details_navigation_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:onClick="vehicleStatusbtnClick"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sliding_out_object_details_icon" />
+
+     <!--   <ImageView
+            android:id="@+id/history_navigation_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sliding_out_history_icon" />-->
+
+        <ImageView
+            android:id="@+id/notifications_navigation_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sliding_out_notifications_icon" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/close_sliding_icon_layout"
+        android:layout_width="30.0dip"
+        android:layout_height="40.0dip"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:layout_width="15.0dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:adjustViewBounds="true"
+            android:onClick="hideSlidingnavigation"
+            android:src="@drawable/sliding_out_close_icon" />
+    </FrameLayout>
+
+
+</RelativeLayout>

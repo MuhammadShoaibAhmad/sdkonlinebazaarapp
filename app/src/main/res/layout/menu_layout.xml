@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toolbar"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearLayout_menu_container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="47.0dip">
+
+            <ImageView
+                android:id="@+id/close_drawer_button"
+                android:layout_width="30.0dip"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10.0dip"
+                android:layout_marginLeft="10.0dip"
+                android:adjustViewBounds="true"
+                android:visibility="visible"
+                android:src="@drawable/close_drawer_ic" />
+
+            <RelativeLayout
+                android:id="@+id/sort_engine_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/sort_button"
+                    android:layout_width="32.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10.0dip"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/sort" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/title_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true">
+
+                <ImageView
+                    android:id="@+id/pin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22.0dip"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15.0dip"
+                    android:layout_marginLeft="15.0dip"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/pin_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/pin"
+                    android:layout_toRightOf="@+id/pin"
+                    android:text="Objects"
+                    android:textColor="@color/blueDark"
+                    android:textSize="19.0sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+    <!--    <EditText
+            android:id="@+id/edittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />-->
+
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/_30sdp"
+            android:paddingLeft="@dimen/_10sdp"
+            android:background="@drawable/flag_background"
+            android:textSize="16.0sp" />
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+    <!--        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vehicleListRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+            </androidx.recyclerview.widget.RecyclerView>-->
+
+
+
+        </ScrollView>
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <LinearLayout
+                android:id="@+id/objects_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:layout_width="fill_parent"
+                    android:layout_height="10.0dip"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/shadow_top" />
+
+                <include layout="@layout/main_menu_expandable_list_footer" />
+            </LinearLayout>
+
+
+        </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/logout_button_empty_list_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+
+          <!--  <ImageView
+                android:id="@+id/imageView_shadow"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/divider_color" />-->
+
+            <TextView
+                android:id="@+id/logout_button_empty_list"
+                android:layout_width="fill_parent"
+                android:layout_height="47.0dip"
+                android:layout_alignParentBottom="true"
+                android:background="@color/greyLight"
+                android:gravity="center"
+                android:onClick="signOut"
+                android:text="Logout"
+                android:textSize="18.0sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

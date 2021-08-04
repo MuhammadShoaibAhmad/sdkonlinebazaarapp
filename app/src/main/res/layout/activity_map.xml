@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layoutlive"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+
+    >
+    <!--   tools:openDrawer="start"-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coordinatorLayout_mainlive"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2live"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            tools:ignore="MissingConstraints">
+
+            <!--<FrameLayout
+                android:id="@+id/full_screen_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:visibility="gone" />-->
+
+            <RelativeLayout
+                android:id="@+id/action_barlive"
+                android:layout_width="fill_parent"
+                android:layout_height="48.0dip"
+                android:background="#fff1f0f0">
+
+                <ImageView
+                    android:id="@+id/open_drawer_button"
+                    android:layout_width="30.0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10.0dip"
+                    android:layout_marginLeft="10.0dip"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_nav_draw_primary"
+                    app:tint="@color/primary"
+                    app:backgroundTint="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/imageView_dashboard_logolive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginTop="10.0dip"
+                        android:layout_marginBottom="10.0dip"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/login_logo" />
+                </LinearLayout>
+
+                <!--     <TexitVew
+                         android:id="@+id/updatetimer"
+                         android:layout_width="30.0dip"
+                         android:layout_height="30.0dip"
+                         android:text="2"
+                         android:layout_alignParentRight="true"
+                         android:layout_centerVertical="true"
+                         android:layout_marginLeft="10.0dip"
+                         android:layout_marginRight="10.0dip"
+                         android:gravity="center"
+                         android:textColor="#ff777777" />-->
+
+                <ImageView
+                    android:id="@+id/notificationslive"
+                    android:layout_width="30.0dip"
+                    android:layout_height="30.0dip"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8.0dip"
+                    android:adjustViewBounds="true"
+
+                    android:scaleType="fitStart"
+                    app:tint="@color/primary"
+                    app:backgroundTint="@color/white"
+                    android:src="@drawable/icon_myaccount"
+                    />
+
+                <TextView
+                    android:id="@+id/badgelive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginStart="-20.0dip"
+                    android:layout_marginTop="3.0dip"
+                    android:layout_toEndOf="@+id/notificationslive"
+                    android:visibility="visible"
+                    android:textColor="#ff777777"/>
+
+                <!--    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="1.0dip"
+                        android:layout_alignParentBottom="true"
+                        android:background="#ffe1dfdf" />-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/content_layoutlive"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/action_barlive"
+                android:layout_alignParentStart="true"
+                android:orientation="vertical">
+
+                <fragment
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:map="http://schemas.android.com/apk/res-auto"
+                    xmlns:tools="http://schemas.android.com/tools"
+                    android:id="@+id/fragment_containerlive"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_above="@+id/frameLayout_sliding_navigation_containerlive"
+                    android:layout_alignParentTop="true"
+                    tools:context="com.track.trackingapp.ui.activities.LiveTrackingActivity"
+                    />
+                <FrameLayout
+                    android:id="@+id/fragment_containerlive2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_above="@+id/frameLayout_sliding_navigation_containerlive"
+                    android:layout_alignParentTop="true"
+                    />
+
+                <FrameLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_above="@+id/frameLayout_sliding_navigation_containerlive"
+                    android:layout_alignParentTop="true"
+                    android:animateLayoutChanges="true">
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabMapTypelive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right|center_vertical|center_horizontal|center|end"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:onClick="ChangeMapTypelive"
+                        android:tint="@color/grey1"
+                        app:backgroundTint="@color/white"
+                        app:fabSize="mini"
+                        app:layout_dodgeInsetEdges="right"
+                        app:srcCompat="@drawable/ic_map" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabDirections"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|left|center_vertical|center_horizontal|center|start"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="12dp"
+                        android:tint="@color/primary"
+                        android:visibility="invisible"
+                        app:backgroundTint="@color/white"
+                        app:fabSize="mini"
+                        app:layout_dodgeInsetEdges="left"
+                        app:srcCompat="@drawable/ic_send" />
+
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabMinuslive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right|center_vertical|center_horizontal|center|end"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="60dp"
+                        android:onClick="onZoomlive"
+                        android:src="@drawable/ic_minus_primary"
+                        app:backgroundTint="@color/white"
+                        app:fabSize="mini"
+                        app:rippleColor="@color/primary" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/fabPluslive"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|right|center_vertical|center_horizontal|center|end"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginBottom="108dp"
+                        android:onClick="onZoomlive"
+
+                        android:src="@drawable/ic_add_primary"
+                        app:backgroundTint="@color/white"
+                        app:fabSize="mini"
+                        app:rippleColor="@color/primary" />
+                </FrameLayout>
+
+
+
+                <FrameLayout
+                    android:id="@+id/frameLayout_sliding_navigation_containerlive"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true">
+
+                    <RelativeLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40.0dip"
+                        android:background="@android:color/white">
+
+                        <ImageView
+                            android:id="@+id/imageView_show_map_settingslive"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:onClick="showsettingLayout"
+                            android:padding="5.0dip"
+                            android:src="@drawable/ic_apps_black_24px"
+                            app:tint="@color/blueDark" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/onmarkerclicklayoutlive"
+                        android:layout_width="fill_parent"
+                        android:layout_height="40.0dip">
+
+                        <include
+                            android:id="@+id/sliding_navigationlive"
+                            layout="@layout/sliding_navigation"
+                            android:layout_width="fill_parent"
+                            android:layout_height="40.0dip" />
+                    </RelativeLayout>
+                </FrameLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/nodata_layoutlive"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/action_barlive"
+                android:background="#ffffffff"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="No Map Data" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/settingLayoutlive"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/relativeLayout2live"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include layout="@layout/map_settings" />
+        </LinearLayout>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/menu_drawerlive"
+        android:background="@android:color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="start">
+        <include layout="@layout/menu_layout" />
+    </LinearLayout>
+
+
+
+
+
+    <!-- <FrameLayout
+         android:layout_gravity="end"
+         android:id="@+id/right_drawer"
+         android:layout_width="240.0dip"
+         android:layout_height="fill_parent" />-->
+</androidx.drawerlayout.widget.DrawerLayout>
+
