@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service   android:enabled="true"
+            android:name=".utils.BackgroundService"/>
+        <activity
+            android:name=".ui.activities.GetlocationActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.activities.ProfileActivity"
             android:exported="true" />

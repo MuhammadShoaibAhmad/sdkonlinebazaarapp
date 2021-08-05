@@ -34,13 +34,13 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true">
 
-                <ImageView
+         <!--       <ImageView
                     android:id="@+id/sort_button"
                     android:layout_width="32.0dip"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="10.0dip"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/sort" />
+                    android:src="@drawable/sort" />-->
             </RelativeLayout>
 
             <RelativeLayout
@@ -50,7 +50,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true">
 
-                <ImageView
+              <!--  <ImageView
                     android:id="@+id/pin"
                     android:layout_width="wrap_content"
                     android:layout_height="22.0dip"
@@ -58,14 +58,13 @@
                     android:layout_marginStart="15.0dip"
                     android:layout_marginLeft="15.0dip"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/pin_icon" />
+                    android:src="@drawable/pin_icon" />-->
 
                 <TextView
+                    android:id="@+id/menuName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_toEndOf="@+id/pin"
-                    android:layout_toRightOf="@+id/pin"
                     android:text="Objects"
                     android:textColor="@color/blueDark"
                     android:textSize="19.0sp" />

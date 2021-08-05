@@ -1,27 +1,50 @@
 package com.bazaar.sdkonlinebazaar.ui.activities;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bazaar.sdkonlinebazaar.BuildConfig;
 import com.bazaar.sdkonlinebazaar.R;
 import com.bazaar.sdkonlinebazaar.constants.Constants;
 import com.bazaar.sdkonlinebazaar.data.Network.RetrofitClient;
 import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
 import com.bazaar.sdkonlinebazaar.ui.adapters.MarkerInfoWindowAdapter;
+import com.bazaar.sdkonlinebazaar.utils.BackgroundService;
 import com.bazaar.sdkonlinebazaar.utils.ProgressDialog;
 import com.bazaar.sdkonlinebazaar.utils.Utils;
+import com.bazaar.sdkonlinebazaar.utils.Wherebouts;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,7 +56,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.core.Context;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,6 +88,9 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     public final static int SENDING = 1;
+
+    private TextView menuName;
+    private PersionResponse per;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +104,9 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
         getAllPersion();
 
+        init();
+        restoreValuesFromBundle(savedInstanceState);
+        startLocationButtonClick();
 
 
 
@@ -104,10 +144,19 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
             }
         };
+
+      //  Wherebouts.instance().onChange(workable);
+        startService(new Intent(this, BackgroundService.class));
+
     }
 
     private void bindViews() {
         progressDialog = new ProgressDialog(this, Constants.verifyMsg);
+
+        per=new PersionResponse();
+        menuName = findViewById(R.id.menuName);
+        menuName.setText(Constants.Name);
+
     }
 
     /**
@@ -134,19 +183,19 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.moveCamera(CameraUpdateFactory.newLatLng(TutorialsPoint));*/
     }
 
-    protected Marker createMarker(double latitude, double longitude,String snippet,String Name) {
+    protected Marker createMarker(double latitude, double longitude,String snippet,String Name,int ID) {
 
 
-     /*   if (mar != null && !hashMapMarker.isEmpty()) {
+        if (mar != null && !hashMapMarker.isEmpty()) {
 
-            if(hashMapMarker.containsKey(iconResID)){
-                Marker marker = hashMapMarker.get(iconResID);
+            if(hashMapMarker.containsKey(ID)){
+                Marker marker = hashMapMarker.get(ID);
                 Log.i("m value:", "m value " + mar);
                 marker.remove();
-                hashMapMarker.remove(iconResID);
+                hashMapMarker.remove(ID);
             };
 
-        }*/
+        }
 
         mar = mMap.addMarker(new MarkerOptions()
                 .position(new LatLng(latitude, longitude))
@@ -246,7 +295,6 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
 
-                            if( oldtrackid != temp.getId()){
 
                               /*  if (m != null) {
                                     m.remove();
@@ -259,7 +307,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                         "Mobile: "+temp.getMobile()+"\n"+
                                         "Education: "+temp.getEducation()+"\n"+
                                         "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
-                                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName());
+                                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
 
                                 builder.include(sydney);
                                 if(Constants.allpersionList.size()==1){
@@ -269,7 +317,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                 // LoconLocationChanged(temp.getLatitude(),temp.getLongitude());
 
 
-                            }
+
                             /*   if(temp.getEventName().contains("Tracking"))*/
                             hashMapMarker.put(temp.getId(),mar);
 
@@ -382,5 +430,214 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         MainmapActivity.this.startActivity(i);
+    }
+
+
+
+
+
+
+
+
+
+    //location getting process
+    private String mLastUpdateTime;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
+    public void init() {
+        Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainmapActivity.this);
+        Constants.mSettingsClient = LocationServices.getSettingsClient(MainmapActivity.this);
+
+        Constants.mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                // location is received
+                Constants.mCurrentLocation = locationResult.getLastLocation();
+                mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+
+                updateLocationUI();
+            }
+        };
+
+        Constants.mRequestingLocationUpdates = false;
+
+        Constants.mLocationRequest = new LocationRequest();
+        Constants.mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+        Constants.mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        Constants.mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(Constants.mLocationRequest);
+        Constants.mLocationSettingsRequest = builder.build();
+    }
+    private void restoreValuesFromBundle(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("is_requesting_updates")) {
+                Constants.mRequestingLocationUpdates = savedInstanceState.getBoolean("is_requesting_updates");
+            }
+
+            if (savedInstanceState.containsKey("last_known_location")) {
+                Constants.mCurrentLocation = savedInstanceState.getParcelable("last_known_location");
+            }
+
+            if (savedInstanceState.containsKey("last_updated_on")) {
+                mLastUpdateTime = savedInstanceState.getString("last_updated_on");
+            }
+        }
+
+        updateLocationUI();
+    }
+    private void updateLocationUI() {
+        if (Constants.mCurrentLocation != null) {
+
+            Log.e("Started location updates","Started location updates!="+Constants.mCurrentLocation.getLatitude());
+         /*   per.setLatitude(Constants.mCurrentLocation.getLatitude());
+            per.setLongitude(Constants.mCurrentLocation.getLongitude());
+            per.setId(Constants.ID);*/
+            double Latitude=Constants.mCurrentLocation.getLatitude();
+            double Longitude=Constants.mCurrentLocation.getLongitude();
+            int ID=Constants.ID;
+            Call<String> updateResponseCall = RetrofitClient.getInstance().UpdateLatLong(ID,Latitude,Longitude);
+            updateResponseCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    progressDialog.hideProgressDialog();
+                    if (response.body() != null) {
+
+                    } else {
+                        Utils.showSnackBar(MainmapActivity.this, "Invalid user ..!!");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    progressDialog.hideProgressDialog();
+                    Utils.showSnackBar(MainmapActivity.this, "Something went wrong ..!!");
+                    Log.e("TAG", t.getMessage());
+                }
+            });
+        }
+
+
+    }
+    private void startLocationUpdates() {
+        Constants.mSettingsClient
+                .checkLocationSettings(Constants.mLocationSettingsRequest)
+                .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+                    @SuppressLint("MissingPermission")
+                    @Override
+                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                        Log.i("TAG", "All location settings are satisfied.");
+
+                        Toast.makeText(getApplicationContext(), "Started location updates!", Toast.LENGTH_LONG).show();
+
+                        //noinspection MissingPermission
+                        Constants.mFusedLocationClient.requestLocationUpdates(Constants.mLocationRequest,
+                                Constants.mLocationCallback, Looper.myLooper());
+
+                        updateLocationUI();
+                    }
+                })
+                .addOnFailureListener(this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        int statusCode = ((ApiException) e).getStatusCode();
+                        switch (statusCode) {
+                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                                Log.i("TAG", "Location settings are not satisfied. Attempting to upgrade " +
+                                        "location settings ");
+                                try {
+                                    // Show the dialog by calling startResolutionForResult(), and check the
+                                    // result in onActivityResult().
+                                    ResolvableApiException rae = (ResolvableApiException) e;
+                                    rae.startResolutionForResult(MainmapActivity.this, Constants.REQUEST_CHECK_SETTINGS);
+                                } catch (IntentSender.SendIntentException sie) {
+                                    Log.i("TAG", "PendingIntent unable to execute request.");
+                                }
+                                break;
+                            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                String errorMessage = "Location settings are inadequate, and cannot be " +
+                                        "fixed here. Fix in Settings.";
+                                Log.e("TAG", errorMessage);
+
+                                Toast.makeText(MainmapActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                        }
+
+                        updateLocationUI();
+                    }
+                });
+    }
+    private void startLocationButtonClick() {
+        // Requesting ACCESS_FINE_LOCATION using Dexter library
+        Dexter.withActivity(this)
+                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                        Constants.mRequestingLocationUpdates = true;
+                        startLocationUpdates();
+                    }
+
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                        if (response.isPermanentlyDenied()) {
+                            // open device settings when the permission is
+                            // denied permanently
+                            openSettings();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            // Check for the integer request code originally supplied to startResolutionForResult().
+            case Constants.REQUEST_CHECK_SETTINGS:
+                switch (resultCode) {
+                    case Activity.RESULT_OK:
+                        Log.e("TAG", "User agreed to make required location settings changes.");
+                        // Nothing to do. startLocationupdates() gets called in onResume again.
+                        break;
+                    case Activity.RESULT_CANCELED:
+                        Log.e("TAG", "User chose not to make required location settings changes.");
+                        Constants.mRequestingLocationUpdates = false;
+                        break;
+                }
+                break;
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Resuming location updates depending on button state and
+        // allowed permissions
+        if (Constants.mRequestingLocationUpdates && checkPermissions()) {
+            startLocationUpdates();
+        }
+
+        updateLocationUI();
+    }
+    private boolean checkPermissions() {
+        int permissionState = ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION);
+        return permissionState == PackageManager.PERMISSION_GRANTED;
+    }
+    private void openSettings() {
+        Intent intent = new Intent();
+        intent.setAction(
+                Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package",
+                BuildConfig.APPLICATION_ID, null);
+        intent.setData(uri);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 }

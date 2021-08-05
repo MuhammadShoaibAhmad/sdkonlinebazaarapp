@@ -67,4 +67,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.2.1'
 
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    // dexter runtime permissions
+    implementation 'com.karumi:dexter:4.2.0'
+
+    // ButterKnife view binding
+/*    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'*/
 }

@@ -65,17 +65,26 @@ public class RetrofitClient {
 
         @POST("Main/CreatePerson")
         Call<PersionResponse> CreatePersion(@Body PersionResponse post);
-   /*     @FormUrlEncoded
-        @POST("Account/GetAllVehicles")
-        Call<List<AllVehicleResponse>> getvehicles(
-                @Field("CustomersVehiclesID") int cvId,
-                @Field("CustomerID") int cId,
-                @Field("OrgID") int orgId,
-                @Field("BranchID") int brId,
-                @Field("TrackID") int trackId
-        );*/
+
+
+     /*   @POST("Main/UpdateLatLongPersonInfo")
+        Call<Boolean> UpdateLatLong(@Body PersionResponse post);*/
+
+        @GET("Main/UpdateLatLongPersonInfo")
+        Call<String> UpdateLatLong(
+                @Query("ID") int ID,
+                @Query("Latitude") double Latitude,
+                @Query("Longitude") double Longitude
+        );
 
 /*
+
+    @GET("Notification/GetCriticalAlarms")
+        Call<List<NotificationResponse>> getVehicleNotifications(
+                @Query("CustomerID") int customerId,
+                @Query("Orgid") int organizationId,
+                @Query("OrgbrID") int organizationBranchId
+        )
         @FormUrlEncoded
         @POST("Account/GetVehicleHistoryByCustomerVehicleId")
         Call<List<VehicleHistoryResponse>> getvehiclesHistory(

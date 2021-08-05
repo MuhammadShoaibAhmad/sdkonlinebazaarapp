@@ -83,21 +83,20 @@
                     android:adjustViewBounds="true"
 
                     android:scaleType="fitStart"
-                    app:tint="@color/primary"
-                    app:backgroundTint="@color/white"
                     android:src="@drawable/icon_myaccount"
-                    />
+                    app:backgroundTint="@color/white"
+                    app:tint="@color/primary" />
 
                 <TextView
                     android:id="@+id/badgelive"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:layout_marginStart="-20.0dip"
                     android:layout_marginTop="3.0dip"
                     android:layout_toEndOf="@+id/notificationslive"
-                    android:visibility="visible"
-                    android:textColor="#ff777777"/>
+                    android:text=""
+                    android:textColor="#ff777777"
+                    android:visibility="visible" />
 
                 <!--    <View
                         android:layout_width="fill_parent"
@@ -106,11 +105,26 @@
                         android:background="#ffe1dfdf" />-->
             </RelativeLayout>
 
+
+            <RelativeLayout
+                android:id="@+id/action_barlive1"
+                android:layout_width="fill_parent"
+                android:layout_height="48.0dip"
+                android:layout_below="@+id/action_barlive"
+                android:background="@drawable/background_white_with_grey_border">
+
+                <include
+                    android:id="@+id/module_navigationlive"
+                    layout="@layout/module_navigation"
+                    android:layout_width="fill_parent"
+                    android:layout_height="40.0dip" />
+
+            </RelativeLayout>
             <RelativeLayout
                 android:id="@+id/content_layoutlive"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@+id/action_barlive"
+                android:layout_below="@+id/action_barlive1"
                 android:layout_alignParentStart="true"
                 android:orientation="vertical">
 
