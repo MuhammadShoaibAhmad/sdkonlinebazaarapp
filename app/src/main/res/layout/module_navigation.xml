@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/module_navigation"
+    android:layout_width="fill_parent"
+    android:layout_height="40.0dip"
+    android:orientation="vertical">
+
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:weightSum="3.0">
+
+        <ImageView
+            android:id="@+id/food_button"
+            android:layout_width="0.0dip"
+            android:onClick="centerallmarkers"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_food" />
+
+        <ImageView
+            android:id="@+id/job_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:onClick="vehicleStatusbtnClick"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_job" />
+
+     <!--   <ImageView
+            android:id="@+id/history_navigation_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/sliding_out_history_icon" />-->
+
+        <ImageView
+            android:id="@+id/MarriageBureau_button"
+            android:layout_width="0.0dip"
+            android:layout_height="25.0dip"
+            android:layout_gravity="center"
+            android:layout_weight="1.0"
+            android:adjustViewBounds="true"
+            android:src="@drawable/icon_couple" />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
