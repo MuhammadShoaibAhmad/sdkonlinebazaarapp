@@ -78,9 +78,6 @@ public class ProfileActivity extends AppCompatActivity {
         Education.setText(Constants.Education);
         Email.setText(Constants.Email);
 
-//hello Muzammil
-         String Name123="Muzammil";
-
 
         radioMalepro = findViewById(R.id.radioMalepro);
         radioFemalepro = findViewById(R.id.radioFemalepro);
