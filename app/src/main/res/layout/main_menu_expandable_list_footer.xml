@@ -13,14 +13,18 @@
         android:layout_marginBottom="15.0dip"
         android:text="Navigation"
         android:textColor="@android:color/black"
-        android:textSize="20.0sp" />
+        android:textSize="15.0sp" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="5.0dip"
+        android:scaleType="fitXY"
+        android:src="@drawable/shadow_top" />
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="40.0dip"
         android:paddingLeft="5.0dip"
-        android:onClick="eventtitleclick"
+        android:onClick="eventprofileclick"
         android:paddingRight="5.0dip">
-
 
 
         <ImageView
@@ -31,12 +35,12 @@
             android:layout_marginTop="5.0dip"
             android:layout_marginEnd="4dp"
             android:buttonTint="@color/primary"
-            android:src="@drawable/icon_events"
             android:orientation="vertical"
+            android:src="@drawable/icon_profile_lg"
             android:textColor="@color/material_black" />
 
         <TextView
-            android:id="@+id/eventtitle"
+            android:id="@+id/profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/icon_events1"
@@ -51,32 +55,9 @@
             android:focusable="false"
             android:gravity="center|left"
             android:maxLines="1"
-            android:text="Events"
+            android:text="Profile"
             android:textColor="@color/greyDarker"
             android:textSize="16.0sp" />
-
-  <!--      <View
-            android:id="@+id/onlineImageView"
-            android:layout_width="15.0dip"
-            android:layout_height="15.0dip"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="15.0dip"
-            android:layout_toStartOf="@+id/three_dots"
-            android:backgroundTint="@color/black"
-            android:background="@drawable/circle_drawable"
-            android:focusable="false"
-            android:paddingTop="6.0dip"
-            android:paddingBottom="6.0dip" />-->
-
-      <!--  <ImageView
-            android:id="@+id/engine_status"
-            android:layout_width="wrap_content"
-            android:layout_height="15.0dip"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="3.0dip"
-            android:layout_toLeftOf="@+id/onlineImageView"
-            android:src="@drawable/engine"
-            android:visibility="gone" />-->
 
         <ImageView
             android:id="@+id/imageright1"
@@ -94,43 +75,42 @@
     </RelativeLayout>
 
 
-    <RelativeLayout
+  <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="40.0dip"
         android:paddingLeft="5.0dip"
         android:paddingRight="5.0dip"
-        android:onClick="historytitleclick">
+        android:onClick="contectUstitleclick">
 
-        <ImageView
-            android:id="@+id/icon_history1"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginStart="0dp"
-            android:layout_marginTop="5.0dip"
-            android:layout_marginEnd="4dp"
-            android:buttonTint="@color/primary"
-            android:src="@drawable/icon_history"
-            android:orientation="vertical"
-            android:textColor="@color/material_black" />
+      <ImageView
+          android:id="@+id/icon_history1"
+          android:layout_width="@dimen/_25sdp"
+          android:layout_height="@dimen/_25sdp"
+          android:layout_marginStart="0dp"
+          android:layout_marginEnd="4dp"
+          android:buttonTint="@color/primary"
+          android:orientation="vertical"
+          android:src="@drawable/icon_contact_mail"
+          android:textColor="@color/material_black" />
 
-        <TextView
-            android:id="@+id/historytitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/icon_history1"
-            android:layout_alignBottom="@+id/icon_history1"
-            android:layout_alignParentTop="false"
-            android:layout_marginStart="10.0dip"
-            android:layout_marginLeft="10.0dip"
-            android:layout_toEndOf="@+id/icon_history1"
-            android:layout_toRightOf="@+id/icon_history1"
-            android:ellipsize="end"
-            android:focusable="false"
-            android:gravity="center|left"
-            android:maxLines="1"
-            android:text="History"
-            android:textColor="@color/greyDarker"
-            android:textSize="16.0sp" />
+      <TextView
+          android:id="@+id/historytitle"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignTop="@+id/icon_history1"
+          android:layout_alignBottom="@+id/icon_history1"
+          android:layout_alignParentTop="false"
+          android:layout_marginStart="10.0dip"
+          android:layout_marginLeft="10.0dip"
+          android:layout_toEndOf="@+id/icon_history1"
+          android:layout_toRightOf="@+id/icon_history1"
+          android:ellipsize="end"
+          android:focusable="false"
+          android:gravity="center|left"
+          android:maxLines="1"
+          android:text="Contact Us"
+          android:textColor="@color/greyDarker"
+          android:textSize="16.0sp" />
 
 
         <ImageView
@@ -148,7 +128,7 @@
 
     </RelativeLayout>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <!--  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="40.0dip"
         android:paddingLeft="5.0dip"
@@ -255,5 +235,5 @@
             android:paddingBottom="6.0dip"
             android:src="@drawable/arrow_right_lighter" />
 
-    </RelativeLayout>
+    </RelativeLayout>-->
 </LinearLayout>

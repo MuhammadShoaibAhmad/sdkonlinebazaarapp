@@ -41,9 +41,9 @@
                     android:layout_marginStart="10.0dip"
                     android:layout_marginLeft="10.0dip"
                     android:adjustViewBounds="true"
-                    android:src="@drawable/ic_nav_draw_primary"
+                    android:src="@drawable/icon_menu_lg"
                     app:backgroundTint="@color/white"
-                    app:tint="@color/primary" />
+                    />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -51,14 +51,15 @@
                     android:layout_centerInParent="true"
                     android:gravity="center">
 
-                    <ImageView
+                    <TextView
                         android:id="@+id/imageView_dashboard_logolive"
                         android:layout_width="wrap_content"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="10.0dip"
+                        android:layout_marginTop="13.0dip"
                         android:layout_marginBottom="10.0dip"
                         android:adjustViewBounds="true"
-                        android:src="@drawable/login_logo" />
+                        android:text="SDK ONLINE BAZAAR"
+                        android:textColor="@color/black"/>
                 </LinearLayout>
 
                 <!--     <TexitVew
@@ -81,11 +82,11 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="8.0dip"
                     android:adjustViewBounds="true"
-
+                    android:onClick="eventprofileclick"
                     android:scaleType="fitStart"
-                    android:src="@drawable/icon_myaccount"
-                    app:backgroundTint="@color/white"
-                    app:tint="@color/primary" />
+                    android:src="@drawable/icon_profile_lg"
+
+                    />
 
                 <TextView
                     android:id="@+id/badgelive"
@@ -229,7 +230,6 @@
                     android:layout_alignParentBottom="true">
 
                     <RelativeLayout
-                        xmlns:android="http://schemas.android.com/apk/res/android"
                         android:layout_width="fill_parent"
                         android:layout_height="40.0dip"
                         android:background="@android:color/white">
@@ -239,16 +239,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:onClick="showsettingLayout"
+                            android:onClick="centerallmarkers"
                             android:padding="5.0dip"
                             android:src="@drawable/ic_apps_black_24px"
-                            app:tint="@color/blueDark" />
+                           />
                     </RelativeLayout>
-
+                 <!--   app:tint="@color/blueDark"-->
                     <RelativeLayout
                         xmlns:android="http://schemas.android.com/apk/res/android"
                         android:id="@+id/onmarkerclicklayoutlive"
                         android:layout_width="fill_parent"
+                        android:visibility="gone"
                         android:layout_height="40.0dip">
 
                         <include

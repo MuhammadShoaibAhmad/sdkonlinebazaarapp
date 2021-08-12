@@ -1,9 +1,379 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView   xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.ProfileActivity">
+    android:id="@+id/main_login_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+
+
+    android:background="@color/material_grey200">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/_20sdp"
+    >
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout_buttons_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32.0dip"
+        android:layout_marginTop="0.0dip"
+        android:layout_marginRight="32.0dip"
+        android:layout_marginBottom="32.0dip"
+        android:background="@color/material_black"
+        android:orientation="vertical"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/action_barprofile"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:background="#fff1f0f0">
+             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/imageView_dashboard_logolive"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_marginBottom="10.0dip"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/icon_myaccount" />
+            </LinearLayout>
+
+        </RelativeLayout>
+        <!-- android:background="@color/primary"-->
+        <LinearLayout
+            android:id="@+id/linearLayout_inputs"
+            android:layout_width="fill_parent"
+            android:layout_height="0.0dip"
+            android:layout_weight="2.0"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Namepro"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Name"
+                android:inputType="text"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/FatherNamepro"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="FatherName"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container7"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/radioGenderpro"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_with_grey_border"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioMalepro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male"
+
+                     />
+
+                <RadioButton
+                    android:id="@+id/radioFemalepro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container6"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Mobilepro"
+                style="@style/LoginEditText"
+
+                android:layout_weight="0.5"
+                android:hint="Mobile"
+                android:inputType="text" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Professionpro"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Profession"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container4"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Educationpro"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Education"
+                android:inputType="text" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container8"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <RadioGroup
+                android:id="@+id/moduleradiopro"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_with_grey_border"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioJobpro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickedJob"
+                    android:text="Job"
+                   />
+
+                <RadioButton
+                    android:id="@+id/radioFoodpro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickedFood"
+                    android:text="Food" />
+                <RadioButton
+                    android:id="@+id/radioMarriageBureaupro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="onClickedMarrage"
+                    android:text="Marriage Bureau" />
+
+
+            </RadioGroup>
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/linearLayout_moduleTypeSpinner_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            >
+
+
+            <Spinner
+                android:id="@+id/moduleTypeSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+
+                android:background="@drawable/darkinput" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/spinner_right" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout_password_container2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Emailpro"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Email"
+                android:inputType="textEmailAddress" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout_salary_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/Salary"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="Salary"
+                android:inputType="text" />
+        </LinearLayout>
+
+<!--        <LinearLayout
+            android:id="@+id/linearLayout_moduleTypeSpinner_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/moduleTypeSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="48.0dip"
+                android:layout_weight="0.5"
+
+                android:background="@drawable/darkinput"
+                />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/spinner_right" />
+        </LinearLayout>-->
+
+        <RelativeLayout
+            android:id="@+id/linearLayout_religionSpinner_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="40.0dip"
+            android:visibility="gone"
+            >
+
+
+            <Spinner
+                android:id="@+id/religionSpinner"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10.0dip"
+
+                android:background="@drawable/darkinput" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
+                android:adjustViewBounds="true"
+                android:src="@drawable/spinner_right" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView_powered_by"
+        style="@style/SignUpBottomTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8.0dip"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Back To?"
+        android:onClick="gotoLoginActivity"
+        android:clickable="true"
+        android:textColor="@color/material_grey700"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView_gpswox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_gpswox"
+        style="@style/SignUpBottomTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4.0dip"
+        android:fontFamily="@font/opensans_regular"
+        android:text="Login"
+        android:onClick="gotoLoginActivity"
+        android:clickable="true"
+        android:textColor="@color/primary"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_powered_by"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView_powered_by"
+        app:layout_constraintTop_toTopOf="@+id/textView_powered_by" />
+
+
+    <Button
+        android:id="@+id/updateprofile"
+        style="@style/SignInButton"
+        android:layout_width="0.0dip"
+        android:layout_marginTop="24.0dip"
+        android:layout_weight="1.0"
+        android:onClick="persionSignUp"
+        android:text="Update Profile"
+
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_buttons_container" />
+
+    <Button
+        android:id="@+id/register"
+        style="@style/SignInButton"
+        android:layout_width="0.0dip"
+        android:layout_marginTop="16.0dip"
+        android:layout_weight="1.0"
+        android:text="@string/signIn"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout_buttons_container"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout_buttons_container" />
+
+    <!--  <ProgressBar
+          android:id="@+id/am_progressBar"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:visibility="gone"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

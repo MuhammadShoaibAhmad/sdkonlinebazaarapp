@@ -25,6 +25,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <!-- android:background="@color/primary"-->
+
+    <!--    <LinearLayout
+            android:id="@+id/linearLayout_salary_container3"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Salary"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:textColor=""/>
+        </LinearLayout>-->
         <LinearLayout
             android:id="@+id/linearLayout_inputs"
             android:layout_width="fill_parent"

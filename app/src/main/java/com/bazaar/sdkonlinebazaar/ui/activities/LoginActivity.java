@@ -101,9 +101,17 @@ public class LoginActivity extends AppCompatActivity {
                             Constants.Name= signinResponse.getName();
                             Constants.FatherName= signinResponse.getFatherName();
                             Constants.ModuleID= signinResponse.getModuleID();
+                            Constants.Gender= signinResponse.getGenderID();
                             Constants.ModulesTypesID= signinResponse.getModulesTypesID();
                             Constants.Latitude= signinResponse.getLatitude();
                             Constants.Longitude= signinResponse.getLongitude();
+
+                            Constants.Mobile= signinResponse.getMobile();
+                            Constants.Profession= signinResponse.getProfession();
+                            Constants.Education= signinResponse.getEducation();
+                            Constants.Email= signinResponse.getEmail();
+                        /*    Constants.Latitude= signinResponse.getLatitude();
+                            Constants.Longitude= signinResponse.getLongitude();*/
                             progressDialog.hideProgressDialog();
                             gotoMapActivity();
                             Utils.showSnackBar(LoginActivity.this, "Login Successfull..!!");

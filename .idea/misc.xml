@@ -21,14 +21,19 @@
         <entry key="..\:/applications/sdk/app/src/main/res/drawable/ic_satellite_black_24px.xml" value="0.11927083333333334" />
         <entry key="..\:/applications/sdk/app/src/main/res/drawable/ic_send.xml" value="0.11927083333333334" />
         <entry key="..\:/applications/sdk/app/src/main/res/drawable/ic_terrain_black_24px.xml" value="0.11927083333333334" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_contactus.xml" value="0.13020833333333334" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_getlocation.xml" value="0.264" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_main.xml" value="0.15833333333333333" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_mainmap.xml" value="0.136" />
-        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_map.xml" value="0.103125" />
-        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_signup.xml" value="0.4" />
-        <entry key="..\:/applications/sdk/app/src/main/res/layout/main_menu_expandable_list_footer.xml" value="0.103125" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_map.xml" value="0.264" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_profile.xml" value="0.1" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/activity_signup.xml" value="0.15804597701149425" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/main_menu_expandable_list_footer.xml" value="0.264" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/map_marker_info_window.xml" value="0.15260416666666668" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/map_settings.xml" value="0.103125" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/menu_layout.xml" value="0.136" />
+        <entry key="..\:/applications/sdk/app/src/main/res/layout/module_navigation.xml" value="0.264" />
         <entry key="..\:/applications/sdk/app/src/main/res/layout/sliding_navigation.xml" value="0.103125" />
       </map>
     </option>

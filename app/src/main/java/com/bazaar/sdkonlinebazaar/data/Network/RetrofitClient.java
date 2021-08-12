@@ -1,6 +1,8 @@
 package com.bazaar.sdkonlinebazaar.data.Network;
 
+import com.bazaar.sdkonlinebazaar.data.responses.ModulesResponse;
 import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
+import com.bazaar.sdkonlinebazaar.data.responses.PersionTrackingDataResponse;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -66,6 +68,10 @@ public class RetrofitClient {
         @POST("Main/CreatePerson")
         Call<PersionResponse> CreatePersion(@Body PersionResponse post);
 
+        @POST("Main/CreatePersonTrackingData")
+        Call<PersionTrackingDataResponse> CreatePersonTrackingData(@Body PersionTrackingDataResponse post);
+
+
 
      /*   @POST("Main/UpdateLatLongPersonInfo")
         Call<Boolean> UpdateLatLong(@Body PersionResponse post);*/
@@ -77,6 +83,11 @@ public class RetrofitClient {
                 @Query("Longitude") double Longitude
         );
 
+
+        @GET("Main/ModulesTypesByModuleIDList")
+        Call<List<ModulesResponse>> getModulesTypesByModuleIDList(
+                @Query("ModuleID") int moduleID
+        );
 /*
 
     @GET("Notification/GetCriticalAlarms")

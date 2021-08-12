@@ -23,6 +23,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -81,6 +82,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private GoogleMap mMap;
     DrawerLayout navDrawer;
     private ProgressDialog progressDialog;
+    private LinearLayout settingLayout;
     private List<PersionResponse> allpersionList;
     LatLngBounds.Builder builder;
     private Marker mar;
@@ -104,9 +106,25 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
         getAllPersion();
 
-        init();
-        restoreValuesFromBundle(savedInstanceState);
-        startLocationButtonClick();
+        try{
+            init();
+        }
+        catch (Exception ex){
+
+        }
+        try{
+            restoreValuesFromBundle(savedInstanceState);
+        }
+        catch (Exception ex){
+
+        }
+        try{
+
+            startLocationButtonClick();
+        }
+        catch (Exception ex){
+
+        }
 
 
 
@@ -117,42 +135,48 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
 
-        ImageView hamMenu = findViewById(R.id.open_drawer_button);
-        hamMenu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navDrawer = findViewById(R.id.drawer_layoutlive);
-                // If the navigation drawer is not open then open it, if its already open then close it.
-                if(!navDrawer.isDrawerOpen(GravityCompat.START)) navDrawer.openDrawer(GravityCompat.START);
-                else navDrawer.closeDrawer(Gravity.LEFT);
-             }
-        });
 
-        mHandler = new Handler();
-        startRepeatingTask();
+        try{
+            ImageView hamMenu = findViewById(R.id.open_drawer_button);
+            hamMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    navDrawer = findViewById(R.id.drawer_layoutlive);
+                    // If the navigation drawer is not open then open it, if its already open then close it.
+                    if(!navDrawer.isDrawerOpen(GravityCompat.START)) navDrawer.openDrawer(GravityCompat.START);
+                    else navDrawer.closeDrawer(Gravity.LEFT);
+                }
+            });
 
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                switch (msg.what) {
+            mHandler = new Handler();
+            startRepeatingTask();
 
-                    case SENDING:
+            mHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    switch (msg.what) {
 
-                        break;
+                        case SENDING:
+
+                            break;
+
+                    }
 
                 }
+            };
 
-            }
-        };
+            //  Wherebouts.instance().onChange(workable);
+            startService(new Intent(this, BackgroundService.class));
+        }catch (Exception ex){
 
-      //  Wherebouts.instance().onChange(workable);
-        startService(new Intent(this, BackgroundService.class));
+        }
+
 
     }
 
     private void bindViews() {
         progressDialog = new ProgressDialog(this, Constants.verifyMsg);
-
+        settingLayout=(LinearLayout) findViewById(R.id.settingLayoutlive);
         per=new PersionResponse();
         menuName = findViewById(R.id.menuName);
         menuName.setText(Constants.Name);
@@ -222,7 +246,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void onZoomlive(View view){
-         int id=view.getId();
+        int id=view.getId();
         if (id == R.id.fabPluslive) {
             mMap.animateCamera(CameraUpdateFactory.zoomIn());
         } else if (id == R.id.fabMinuslive) {
@@ -252,7 +276,11 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         public void run() {
             try {
                 getAllPersion(); //this function can change value of mInterval.
-            } finally {
+            }
+            catch (Exception ex){
+
+
+            }finally {
                 // 100% guarantee that this always happens, even if
                 // your update method throws an exception
                 mHandler.postDelayed(mStatusChecker, mInterval);
@@ -262,35 +290,37 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     int oldtrackid=0;
     HashMap<Integer, Marker> hashMapMarker = new HashMap<>();
     public void getAllPersion() {
-        // progressDialog.showProgressDialog();
-        Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().getPersionInfo();
-        getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
-            @Override
-            public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {
-                progressDialog.hideProgressDialog();
-                if (response != null) {
-                    allpersionList = response.body();
-                    Constants.allpersionList=allpersionList;
 
-                    AsyncCaller asas=new AsyncCaller();
-                    asas.doInBackground();
+        try{
+            // progressDialog.showProgressDialog();
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().getPersionInfo();
+            getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
+                @Override
+                public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {
+                    progressDialog.hideProgressDialog();
+                    if (response != null) {
+                        allpersionList = response.body();
+                        Constants.allpersionList=allpersionList;
 
-
-
-
-                    if (Utils.isValidList(Constants.allpersionList)) {
-                        builder = new LatLngBounds.Builder();
+                        AsyncCaller asas=new AsyncCaller();
+                        asas.doInBackground();
 
 
-                        for (int i = 0; i < Constants.allpersionList.size(); i++) {
 
 
-                            PersionResponse temp = Constants.allpersionList.get(i);
+                        if (Utils.isValidList(Constants.allpersionList)) {
+                            builder = new LatLngBounds.Builder();
+
+
+                            for (int i = 0; i < Constants.allpersionList.size(); i++) {
+
+
+                                PersionResponse temp = Constants.allpersionList.get(i);
                        /*     Log.d("List Result :", "index " + i);
                             Log.i("hashMapMarker :", "hashMapMarker " + hashMapMarker);
 
                             Log.d("List Result :", "First = " + temp.getRegNo());*/
-                            // Marker marker = mMap.addMarker(markerOptions);
+                                // Marker marker = mMap.addMarker(markerOptions);
 
 
 
@@ -318,43 +348,47 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
 
-                            /*   if(temp.getEventName().contains("Tracking"))*/
-                            hashMapMarker.put(temp.getId(),mar);
+                                /*   if(temp.getEventName().contains("Tracking"))*/
+                                hashMapMarker.put(temp.getId(),mar);
 
-                            oldtrackid=temp.getId();
+                                oldtrackid=temp.getId();
+
+
+                            }
+                            mMap.setOnMarkerClickListener(MainmapActivity.this);
+                            if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
+                                Constants.isAlreadyBoud=false;
+                                LatLngBounds bounds = builder.build();
+                                int padding = 60; // offset from edges of the map in pixels
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                                mMap.animateCamera(cu);
+                            }
 
 
                         }
-                        mMap.setOnMarkerClickListener(MainmapActivity.this);
-                        if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
-                            Constants.isAlreadyBoud=false;
-                            LatLngBounds bounds = builder.build();
-                            int padding = 60; // offset from edges of the map in pixels
-                            CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                            mMap.animateCamera(cu);
-                        }
 
+
+
+                    } else {
+                        // Utils.showSnackBar(AllVehiclesActivity.this, "Invalid Response ..!!");
+
+                        Toast.makeText(MainmapActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
 
                     }
-
-
-
-                } else {
-                    // Utils.showSnackBar(AllVehiclesActivity.this, "Invalid Response ..!!");
-
-                    Toast.makeText(MainmapActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
-
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<PersionResponse>> call, Throwable t) {
-                progressDialog.hideProgressDialog();
-                Utils.showSnackBar(MainmapActivity.this, "Something Went Wrong ..!!");
+                @Override
+                public void onFailure(Call<List<PersionResponse>> call, Throwable t) {
+                    progressDialog.hideProgressDialog();
+                    Utils.showSnackBar(MainmapActivity.this, "Something Went Wrong ..!!");
 
-                Toast.makeText(MainmapActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
-            }
-        });
+                    Toast.makeText(MainmapActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+        catch (Exception ex){
+        }
 
 
     }
@@ -385,7 +419,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
             //this method will be running on background thread so don't update UI frome here
             //do your long running http tasks here,you dont want to pass argument and u can access the parent class' variable url over here
 
-           // runlistviews();
+            // runlistviews();
             return null;
         }
 
@@ -405,7 +439,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
        /* if (marker.equals(m))
         {*/
-       // showSlidingnavigation();
+        //showPersionnavigation();
 
         LatLng sydney = new LatLng(marker.getPosition().latitude, marker.getPosition().longitude);
         CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
@@ -422,6 +456,22 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
         /*  }*/
         return  true;
+    }
+
+    private void showPersionnavigation(){
+        settingLayout.setVisibility(View.VISIBLE);
+    }
+    private boolean isshow=true;
+    public void hidePersionnavigation(View view){
+
+
+        if(isshow==true){
+            // settingLayout.setVisibility(View.VISIBLE);
+            isshow=false;
+        }else {
+            settingLayout.setVisibility(View.INVISIBLE);
+            isshow=true;
+        }
     }
 
 
@@ -444,32 +494,39 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private String mLastUpdateTime;
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
-    public void init() {
-        Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainmapActivity.this);
-        Constants.mSettingsClient = LocationServices.getSettingsClient(MainmapActivity.this);
+    private void init() {
+        try {
+            Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainmapActivity.this);
+            Constants.mSettingsClient = LocationServices.getSettingsClient(MainmapActivity.this);
 
-        Constants.mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                super.onLocationResult(locationResult);
-                // location is received
-                Constants.mCurrentLocation = locationResult.getLastLocation();
-                mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
+            Constants.mLocationCallback = new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+                    super.onLocationResult(locationResult);
+                    // location is received
+                    Constants.mCurrentLocation = locationResult.getLastLocation();
+                    mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
 
-                updateLocationUI();
-            }
-        };
+                    updateLocationUI();
+                }
+            };
 
-        Constants.mRequestingLocationUpdates = false;
+            Constants.mRequestingLocationUpdates = false;
 
-        Constants.mLocationRequest = new LocationRequest();
-        Constants.mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-        Constants.mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-        Constants.mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+            Constants.mLocationRequest = new LocationRequest();
+            Constants.mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
+            Constants.mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+            Constants.mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(Constants.mLocationRequest);
-        Constants.mLocationSettingsRequest = builder.build();
+            LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+            builder.addLocationRequest(Constants.mLocationRequest);
+            Constants.mLocationSettingsRequest = builder.build();
+        }
+        catch (Exception ex){
+
+        }
+
+
     }
     private void restoreValuesFromBundle(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
@@ -489,110 +546,132 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         updateLocationUI();
     }
     private void updateLocationUI() {
-        if (Constants.mCurrentLocation != null) {
 
-            Log.e("Started location updates","Started location updates!="+Constants.mCurrentLocation.getLatitude());
+        try{
+            if (Constants.mCurrentLocation != null) {
+
+                Log.e("Started location updates","Started location updates!="+Constants.mCurrentLocation.getLatitude());
          /*   per.setLatitude(Constants.mCurrentLocation.getLatitude());
             per.setLongitude(Constants.mCurrentLocation.getLongitude());
             per.setId(Constants.ID);*/
-            double Latitude=Constants.mCurrentLocation.getLatitude();
-            double Longitude=Constants.mCurrentLocation.getLongitude();
-            int ID=Constants.ID;
-            Call<String> updateResponseCall = RetrofitClient.getInstance().UpdateLatLong(ID,Latitude,Longitude);
-            updateResponseCall.enqueue(new Callback<String>() {
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    progressDialog.hideProgressDialog();
-                    if (response.body() != null) {
+                double Latitude=Constants.mCurrentLocation.getLatitude();
+                double Longitude=Constants.mCurrentLocation.getLongitude();
+                int ID=Constants.ID;
+                Call<String> updateResponseCall = RetrofitClient.getInstance().UpdateLatLong(ID,Latitude,Longitude);
+                updateResponseCall.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        progressDialog.hideProgressDialog();
+                        if (response.body() != null) {
 
-                    } else {
-                        Utils.showSnackBar(MainmapActivity.this, "Invalid user ..!!");
+                        } else {
+                            Utils.showSnackBar(MainmapActivity.this, "Invalid user ..!!");
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    progressDialog.hideProgressDialog();
-                    Utils.showSnackBar(MainmapActivity.this, "Something went wrong ..!!");
-                    Log.e("TAG", t.getMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        progressDialog.hideProgressDialog();
+                        Utils.showSnackBar(MainmapActivity.this, "Something went wrong ..!!");
+                        Log.e("TAG", t.getMessage());
+                    }
+                });
+            }
         }
+        catch (Exception ex){
+
+        }
+
 
 
     }
     private void startLocationUpdates() {
-        Constants.mSettingsClient
-                .checkLocationSettings(Constants.mLocationSettingsRequest)
-                .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-                    @SuppressLint("MissingPermission")
-                    @Override
-                    public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                        Log.i("TAG", "All location settings are satisfied.");
 
-                        Toast.makeText(getApplicationContext(), "Started location updates!", Toast.LENGTH_LONG).show();
+        try{
+            Constants.mSettingsClient
+                    .checkLocationSettings(Constants.mLocationSettingsRequest)
+                    .addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+                        @SuppressLint("MissingPermission")
+                        @Override
+                        public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                            Log.i("TAG", "All location settings are satisfied.");
 
-                        //noinspection MissingPermission
-                        Constants.mFusedLocationClient.requestLocationUpdates(Constants.mLocationRequest,
-                                Constants.mLocationCallback, Looper.myLooper());
+                            Toast.makeText(getApplicationContext(), "Started location updates!", Toast.LENGTH_LONG).show();
 
-                        updateLocationUI();
-                    }
-                })
-                .addOnFailureListener(this, new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        int statusCode = ((ApiException) e).getStatusCode();
-                        switch (statusCode) {
-                            case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                                Log.i("TAG", "Location settings are not satisfied. Attempting to upgrade " +
-                                        "location settings ");
-                                try {
-                                    // Show the dialog by calling startResolutionForResult(), and check the
-                                    // result in onActivityResult().
-                                    ResolvableApiException rae = (ResolvableApiException) e;
-                                    rae.startResolutionForResult(MainmapActivity.this, Constants.REQUEST_CHECK_SETTINGS);
-                                } catch (IntentSender.SendIntentException sie) {
-                                    Log.i("TAG", "PendingIntent unable to execute request.");
-                                }
-                                break;
-                            case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                                String errorMessage = "Location settings are inadequate, and cannot be " +
-                                        "fixed here. Fix in Settings.";
-                                Log.e("TAG", errorMessage);
+                            //noinspection MissingPermission
+                            Constants.mFusedLocationClient.requestLocationUpdates(Constants.mLocationRequest,
+                                    Constants.mLocationCallback, Looper.myLooper());
 
-                                Toast.makeText(MainmapActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                            updateLocationUI();
                         }
+                    })
+                    .addOnFailureListener(this, new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            int statusCode = ((ApiException) e).getStatusCode();
+                            switch (statusCode) {
+                                case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+                                    Log.i("TAG", "Location settings are not satisfied. Attempting to upgrade " +
+                                            "location settings ");
+                                    try {
+                                        // Show the dialog by calling startResolutionForResult(), and check the
+                                        // result in onActivityResult().
+                                        ResolvableApiException rae = (ResolvableApiException) e;
+                                        rae.startResolutionForResult(MainmapActivity.this, Constants.REQUEST_CHECK_SETTINGS);
+                                    } catch (IntentSender.SendIntentException sie) {
+                                        Log.i("TAG", "PendingIntent unable to execute request.");
+                                    }
+                                    break;
+                                case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                                    String errorMessage = "Location settings are inadequate, and cannot be " +
+                                            "fixed here. Fix in Settings.";
+                                    Log.e("TAG", errorMessage);
 
-                        updateLocationUI();
-                    }
-                });
+                                    Toast.makeText(MainmapActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                            }
+
+                            updateLocationUI();
+                        }
+                    });
+        }
+        catch (Exception ex){
+
+
+        }
+
     }
     private void startLocationButtonClick() {
-        // Requesting ACCESS_FINE_LOCATION using Dexter library
-        Dexter.withActivity(this)
-                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-                .withListener(new PermissionListener() {
-                    @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        Constants.mRequestingLocationUpdates = true;
-                        startLocationUpdates();
-                    }
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        if (response.isPermanentlyDenied()) {
-                            // open device settings when the permission is
-                            // denied permanently
-                            openSettings();
+        try {
+            // Requesting ACCESS_FINE_LOCATION using Dexter library
+            Dexter.withActivity(this)
+                    .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                    .withListener(new PermissionListener() {
+                        @Override
+                        public void onPermissionGranted(PermissionGrantedResponse response) {
+                            Constants.mRequestingLocationUpdates = true;
+                            startLocationUpdates();
                         }
-                    }
 
-                    @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
-                    }
-                }).check();
+                        @Override
+                        public void onPermissionDenied(PermissionDeniedResponse response) {
+                            if (response.isPermanentlyDenied()) {
+                                // open device settings when the permission is
+                                // denied permanently
+                                openSettings();
+                            }
+                        }
+
+                        @Override
+                        public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                            token.continuePermissionRequest();
+                        }
+                    }).check();
+        }
+        catch (Exception ex){
+
+        }
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -638,6 +717,17 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                 BuildConfig.APPLICATION_ID, null);
         intent.setData(uri);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
+    public void eventprofileclick(View view){
+        Intent intent = new Intent(MainmapActivity.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
+    public void contectUstitleclick(View view){
+        Intent intent = new Intent(MainmapActivity.this, ContactusActivity.class);
         startActivity(intent);
     }
 }

@@ -3,6 +3,7 @@ package com.bazaar.sdkonlinebazaar.constants;
 
 import android.location.Location;
 
+import com.bazaar.sdkonlinebazaar.data.responses.ModulesResponse;
 import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -27,6 +28,7 @@ public class Constants {
     public static String loadingMsg="Loading...";
     public static String verifyMsg="Verifying...";
     public static List<PersionResponse> allpersionList=new ArrayList<PersionResponse>();
+    public static List<ModulesResponse> allModuleTypeList=new ArrayList<ModulesResponse>();
 
 
 ////Employee Data
@@ -37,6 +39,13 @@ public class Constants {
     public static int ModulesTypesID=-1;
     public static double Latitude=0.0;
     public static double Longitude=0.0;
+
+    public static  String Mobile = "";
+    public static String Profession="" ;
+    public static String Education="";
+    public static String Email="";
+    public static int Gender=-1;
+
 
 
 }

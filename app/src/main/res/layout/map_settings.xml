@@ -42,7 +42,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="5.0dip"
-                android:onClick="showsettingLayout"
+                android:onClick="hidePersionnavigation"
                 android:padding="5.0dip"
                 android:src="@drawable/ic_keyboard_arrow_down_black_24px"
                 app:tint="@color/greyDark" />

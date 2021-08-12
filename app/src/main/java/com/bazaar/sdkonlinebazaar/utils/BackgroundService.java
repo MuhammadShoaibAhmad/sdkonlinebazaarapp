@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat;
 import com.bazaar.sdkonlinebazaar.constants.Constants;
 import com.bazaar.sdkonlinebazaar.data.Network.RetrofitClient;
 import com.bazaar.sdkonlinebazaar.data.responses.GPSPoint;
+import com.bazaar.sdkonlinebazaar.data.responses.PersionTrackingDataResponse;
 import com.bazaar.sdkonlinebazaar.data.responses.Workable;
 import com.bazaar.sdkonlinebazaar.ui.activities.MainmapActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,7 +37,7 @@ public class BackgroundService extends Service {
     private LocationCallback locationCallback;
     private LocationRequest locationRequest;
     private LocationSettingsRequest locationSettingsRequest;
-
+    private PersionTrackingDataResponse pertds;
 
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
@@ -49,6 +50,7 @@ public class BackgroundService extends Service {
     @Override
     public void onCreate() {
         Toast.makeText(this, "Service created!", Toast.LENGTH_LONG).show();
+        pertds=new PersionTrackingDataResponse();
 
         handler = new Handler();
         runnable = new Runnable() {
@@ -75,6 +77,13 @@ public class BackgroundService extends Service {
                         double Latitude= currentLocation.getLatitude();
                         double Longitude=currentLocation.getLongitude();
                         int ID=Constants.ID;
+
+                        pertds.setLatitude(currentLocation.getLatitude());
+                        pertds.setLongitude(currentLocation.getLongitude());
+                        pertds.setSpeed((int) currentLocation.getSpeed());
+
+                        pertds.setHeading((int) currentLocation.getBearing());
+                        pertds.setPersonID(Constants.ID);
                         Call<String> updateResponseCall = RetrofitClient.getInstance().UpdateLatLong(ID,Latitude,Longitude);
                         updateResponseCall.enqueue(new Callback<String>() {
                             @Override
@@ -93,6 +102,26 @@ public class BackgroundService extends Service {
 
                             }
                         });
+
+                  /*      Call<PersionTrackingDataResponse> AddTrackingData = RetrofitClient.getInstance().CreatePersonTrackingData(pertds);
+                        AddTrackingData.enqueue(new Callback<PersionTrackingDataResponse>() {
+                            @Override
+                            public void onResponse(Call<PersionTrackingDataResponse> call, Response<PersionTrackingDataResponse> response) {
+
+                                if (response.body() != null) {
+                                    pertds = response.body();
+                                    Toast.makeText(context, "Speed!"+pertds.getSpeed()+"Heading!"+pertds.getHeading(), Toast.LENGTH_SHORT).show();
+                                } else {
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<PersionTrackingDataResponse> call, Throwable t) {
+
+                            }
+                        });*/
+
                     }
                 };
 
