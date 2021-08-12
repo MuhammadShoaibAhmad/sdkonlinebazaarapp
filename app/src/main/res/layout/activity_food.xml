@@ -110,15 +110,15 @@
             <RelativeLayout
                 android:id="@+id/action_barlive1"
                 android:layout_width="fill_parent"
-                android:layout_height="48.0dip"
+                android:layout_height="50.0dip"
                 android:layout_below="@+id/action_barlive"
                 android:background="@drawable/background_white_with_grey_border">
 
                 <include
                     android:id="@+id/module_navigationlive"
-                    layout="@layout/module_navigation"
+                    layout="@layout/food_navigation"
                     android:layout_width="fill_parent"
-                    android:layout_height="40.0dip" />
+                    android:layout_height="50.0dip" />
 
             </RelativeLayout>
             <RelativeLayout
@@ -306,13 +306,5 @@
     </LinearLayout>
 
 
-
-
-
-    <!-- <FrameLayout
-         android:layout_gravity="end"
-         android:id="@+id/right_drawer"
-         android:layout_width="240.0dip"
-         android:layout_height="fill_parent" />-->
 </androidx.drawerlayout.widget.DrawerLayout>
 

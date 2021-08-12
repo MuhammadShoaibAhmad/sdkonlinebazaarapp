@@ -1,5 +1,11 @@
 package com.bazaar.sdkonlinebazaar.ui.activities;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+
+import com.bazaar.sdkonlinebazaar.R;
+
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
@@ -77,14 +83,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class MainmapActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
+public class FoodActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     DrawerLayout navDrawer;
     private ProgressDialog progressDialog;
     private LinearLayout settingLayout;
     private List<PersionResponse> allpersionList;
-    LatLngBounds.Builder builder;
+    private LatLngBounds.Builder builder;
     private Marker mar;
 
     private int mInterval = 5000; // 5 seconds by default, can be changed later
@@ -96,7 +102,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_food);
         bindViews();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -355,7 +361,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
                             }
-                            mMap.setOnMarkerClickListener(MainmapActivity.this);
+                            mMap.setOnMarkerClickListener(FoodActivity.this);
                             if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
                                 Constants.isAlreadyBoud=false;
                                 LatLngBounds bounds = builder.build();
@@ -372,7 +378,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                     } else {
                         // Utils.showSnackBar(AllVehiclesActivity.this, "Invalid Response ..!!");
 
-                        Toast.makeText(MainmapActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
 
                     }
                 }
@@ -380,9 +386,9 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                 @Override
                 public void onFailure(Call<List<PersionResponse>> call, Throwable t) {
                     progressDialog.hideProgressDialog();
-                    Utils.showSnackBar(MainmapActivity.this, "Something Went Wrong ..!!");
+                    Utils.showSnackBar(FoodActivity.this, "Something Went Wrong ..!!");
 
-                    Toast.makeText(MainmapActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -476,10 +482,10 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void signOut(View view) {
-        Intent i = new Intent(MainmapActivity.this, LoginActivity.class);
+        Intent i = new Intent(FoodActivity.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MainmapActivity.this.startActivity(i);
+        FoodActivity.this.startActivity(i);
     }
 
 
@@ -496,8 +502,8 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
     private void init() {
         try {
-            Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainmapActivity.this);
-            Constants.mSettingsClient = LocationServices.getSettingsClient(MainmapActivity.this);
+            Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(FoodActivity.this);
+            Constants.mSettingsClient = LocationServices.getSettingsClient(FoodActivity.this);
 
             Constants.mLocationCallback = new LocationCallback() {
                 @Override
@@ -565,14 +571,14 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                         if (response.body() != null) {
 
                         } else {
-                            Utils.showSnackBar(MainmapActivity.this, "Invalid user ..!!");
+                            Utils.showSnackBar(FoodActivity.this, "Invalid user ..!!");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         progressDialog.hideProgressDialog();
-                        Utils.showSnackBar(MainmapActivity.this, "Something went wrong ..!!");
+                        Utils.showSnackBar(FoodActivity.this, "Something went wrong ..!!");
                         Log.e("TAG", t.getMessage());
                     }
                 });
@@ -617,7 +623,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                         // Show the dialog by calling startResolutionForResult(), and check the
                                         // result in onActivityResult().
                                         ResolvableApiException rae = (ResolvableApiException) e;
-                                        rae.startResolutionForResult(MainmapActivity.this, Constants.REQUEST_CHECK_SETTINGS);
+                                        rae.startResolutionForResult(FoodActivity.this, Constants.REQUEST_CHECK_SETTINGS);
                                     } catch (IntentSender.SendIntentException sie) {
                                         Log.i("TAG", "PendingIntent unable to execute request.");
                                     }
@@ -627,7 +633,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                             "fixed here. Fix in Settings.";
                                     Log.e("TAG", errorMessage);
 
-                                    Toast.makeText(MainmapActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(FoodActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                             }
 
                             updateLocationUI();
@@ -722,24 +728,24 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void eventprofileclick(View view){
-        Intent intent = new Intent(MainmapActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(FoodActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 
     public void contectUstitleclick(View view){
-        Intent intent = new Intent(MainmapActivity.this, ContactusActivity.class);
+        Intent intent = new Intent(FoodActivity.this, ContactusActivity.class);
         startActivity(intent);
     }
     public void gotoFoodActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, FoodActivity.class);
+        Intent intent = new Intent(FoodActivity.this, FoodActivity.class);
         startActivity(intent);
     }
     public void gotoJobActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, JobActivity.class);
+        Intent intent = new Intent(FoodActivity.this, JobActivity.class);
         startActivity(intent);
     }
     public void gotoMarrageActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, MarrageActivity.class);
+        Intent intent = new Intent(FoodActivity.this, MarrageActivity.class);
         startActivity(intent);
     }
 

@@ -17,7 +17,7 @@
         <ImageView
             android:id="@+id/food_button"
             android:layout_width="0.0dip"
-            android:onClick="centerallmarkers"
+            android:onClick="gotoFoodActivity"
             android:layout_height="25.0dip"
             android:layout_gravity="center"
             android:layout_weight="1.0"
@@ -29,7 +29,7 @@
             android:layout_width="0.0dip"
             android:layout_height="25.0dip"
             android:layout_gravity="center"
-            android:onClick="vehicleStatusbtnClick"
+            android:onClick="gotoJobActivity"
             android:layout_weight="1.0"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_job" />
@@ -49,6 +49,7 @@
             android:layout_height="25.0dip"
             android:layout_gravity="center"
             android:layout_weight="1.0"
+            android:onClick="gotoMarrageActivity"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_couple" />
     </LinearLayout>

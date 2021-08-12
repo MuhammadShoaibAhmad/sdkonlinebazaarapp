@@ -65,6 +65,16 @@ public class RetrofitClient {
         @GET("Main/GetAllPerson")
         Call<List<PersionResponse>> getPersionInfo();
 
+        @GET("Main/GetPersonByModuleId")
+        Call<List<PersionResponse>> GetPersonByModuleId(
+                @Query("ID") int ID
+        );
+        @GET("Main/GetPersonByModuleAndTypeId")
+        Call<List<PersionResponse>> GetPersonByModuleAndTypeId(
+                @Query("ID") int ID,
+                @Query("ModuleTypeID") int ModuleTypeID
+        );
+
         @POST("Main/CreatePerson")
         Call<PersionResponse> CreatePersion(@Body PersionResponse post);
 

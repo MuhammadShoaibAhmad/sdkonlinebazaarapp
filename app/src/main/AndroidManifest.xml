@@ -14,6 +14,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.activities.MarrageActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.JobActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.RestaurantsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.HomemadeActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.FoodActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.activities.ContactusActivity"
             android:exported="true" />
 
