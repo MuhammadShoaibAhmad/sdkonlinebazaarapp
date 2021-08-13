@@ -299,7 +299,7 @@ public class FoodActivity extends FragmentActivity implements OnMapReadyCallback
 
         try{
             // progressDialog.showProgressDialog();
-            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().getPersionInfo();
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleId(1);
             getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
                 @Override
                 public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {
@@ -744,8 +744,13 @@ public class FoodActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(FoodActivity.this, JobActivity.class);
         startActivity(intent);
     }
-    public void gotoMarrageActivity(View view){
-        Intent intent = new Intent(FoodActivity.this, MarrageActivity.class);
+
+    public void gotoRestaurantsActivity(View view){
+        Intent intent = new Intent(FoodActivity.this, RestaurantsActivity.class);
+        startActivity(intent);
+    }
+    public void gotoHomemadeActivity(View view){
+        Intent intent = new Intent(FoodActivity.this, HomemadeActivity.class);
         startActivity(intent);
     }
 

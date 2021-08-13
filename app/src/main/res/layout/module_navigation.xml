@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/module_navigation"
     android:layout_width="fill_parent"
-    android:layout_height="40.0dip"
+    android:layout_height="50.0dip"
     android:orientation="vertical">
 
 
@@ -14,7 +14,52 @@
         android:background="@android:color/white"
         android:weightSum="3.0">
 
-        <ImageView
+        <Button
+            android:id="@+id/food_button"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:onClick="gotoFoodActivity"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:layout_weight="1.0"
+            android:text="Food"
+            android:textColor="@color/white"
+            android:background="@color/black"
+            android:adjustViewBounds="true"
+            />
+
+
+
+
+
+
+        <Button
+            android:id="@+id/job_button"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:onClick="gotoJobActivity"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:layout_weight="1.0"
+            android:text="Job"
+            android:textColor="@color/white"
+            android:background="@color/black"
+            android:adjustViewBounds="true"
+            />
+        <Button
+            android:id="@+id/MarriageBureau_button"
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:onClick="gotoMarrageActivity"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_weight="1.0"
+            android:text="Marriage"
+            android:textColor="@color/white"
+            android:background="@color/black"
+            android:adjustViewBounds="true"
+            />
+   <!--     <ImageView
             android:id="@+id/food_button"
             android:layout_width="0.0dip"
             android:onClick="gotoFoodActivity"
@@ -33,7 +78,7 @@
             android:layout_weight="1.0"
             android:adjustViewBounds="true"
             android:src="@drawable/icon_job" />
-
+-->
      <!--   <ImageView
             android:id="@+id/history_navigation_button"
             android:layout_width="0.0dip"
@@ -43,7 +88,7 @@
             android:adjustViewBounds="true"
             android:src="@drawable/sliding_out_history_icon" />-->
 
-        <ImageView
+  <!--      <ImageView
             android:id="@+id/MarriageBureau_button"
             android:layout_width="0.0dip"
             android:layout_height="25.0dip"
@@ -51,7 +96,7 @@
             android:layout_weight="1.0"
             android:onClick="gotoMarrageActivity"
             android:adjustViewBounds="true"
-            android:src="@drawable/icon_couple" />
+            android:src="@drawable/icon_couple" />-->
     </LinearLayout>
 
 

@@ -163,26 +163,26 @@ public class MapActivity extends FragmentActivity implements
 
                             int height = 55;
                             int width = 30;
-                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.pin_icon);
+                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_default);
                             Bitmap b = bitmapdraw.getBitmap();
                             smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
 
                         }else if(currentZoom >12.0 && currentZoom < 16.0) {
                             int height = 75;
                             int width = 40;
-                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.pin_icon);
+                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_default);
                             Bitmap b = bitmapdraw.getBitmap();
                             smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
                         }else if(currentZoom >=17.0){
                             int height = 80;
                             int width = 45;
-                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.pin_icon);
+                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_default);
                             Bitmap b = bitmapdraw.getBitmap();
                             smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
                         }else{
                             int height = 75;
                             int width = 40;
-                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.pin_icon);
+                            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.marker_default);
                             Bitmap b = bitmapdraw.getBitmap();
                             smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
                         }

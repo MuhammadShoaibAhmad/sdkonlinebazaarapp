@@ -46,20 +46,29 @@
                     />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_200sdp"
                     android:layout_height="fill_parent"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/background_with_border"
                     android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/imageView_dashboard_logolive"
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:id="@+id/edittextSearch"
+                        android:layout_width="@dimen/_160sdp"
+                        android:paddingLeft="@dimen/_8sdp"
                         android:layout_height="fill_parent"
-                        android:layout_marginTop="13.0dip"
-                        android:layout_marginBottom="10.0dip"
+                        android:hint="Search"
+                        android:background="@null"
+                      />
+                    <ImageView
+                        android:id="@+id/Searchbtn"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
                         android:adjustViewBounds="true"
-                        android:text="SDK ONLINE BAZAAR"
-                        android:textColor="@color/black"/>
+                        android:layout_margin="@dimen/_5sdp"
+                        android:background="@drawable/toolbar_icon_map"
+                       />
                 </LinearLayout>
 
                 <!--     <TexitVew
@@ -110,7 +119,9 @@
             <RelativeLayout
                 android:id="@+id/action_barlive1"
                 android:layout_width="fill_parent"
-                android:layout_height="48.0dip"
+                android:layout_height="50.0dip"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_2sdp"
                 android:layout_below="@+id/action_barlive"
                 android:background="@drawable/background_white_with_grey_border">
 
@@ -118,7 +129,7 @@
                     android:id="@+id/module_navigationlive"
                     layout="@layout/module_navigation"
                     android:layout_width="fill_parent"
-                    android:layout_height="40.0dip" />
+                    android:layout_height="50.0dip" />
 
             </RelativeLayout>
             <RelativeLayout

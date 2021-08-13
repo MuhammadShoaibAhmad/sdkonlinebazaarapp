@@ -19,9 +19,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -68,6 +71,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -181,6 +185,37 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         menuName = findViewById(R.id.menuName);
         menuName.setText(Constants.Name);
 
+
+        EditText editText = findViewById(R.id.edittextSearch);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
+            }
+        });
+    }
+
+    private void filter(String text) {
+
+        stopRepeatingTask();
+       List<PersionResponse> filteredList=new ArrayList<PersionResponse>();
+        for (PersionResponse item :  Constants.allpersionList) {
+            if (item.getProfession().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+                Toast.makeText(MainmapActivity.this, "Response ..!!"+item, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        Constants.allpersionList=filteredList;
+
+        updatemapbysearch("search");
+
     }
 
     /**
@@ -227,7 +262,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                 .title(Name)
                 .snippet(snippet)
                 //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_icon)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_default)));
 
         return mar;
     }
@@ -305,67 +340,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                         AsyncCaller asas=new AsyncCaller();
                         asas.doInBackground();
 
-
-
-
-                        if (Utils.isValidList(Constants.allpersionList)) {
-                            builder = new LatLngBounds.Builder();
-
-
-                            for (int i = 0; i < Constants.allpersionList.size(); i++) {
-
-
-                                PersionResponse temp = Constants.allpersionList.get(i);
-                       /*     Log.d("List Result :", "index " + i);
-                            Log.i("hashMapMarker :", "hashMapMarker " + hashMapMarker);
-
-                            Log.d("List Result :", "First = " + temp.getRegNo());*/
-                                // Marker marker = mMap.addMarker(markerOptions);
-
-
-
-
-
-                              /*  if (m != null) {
-                                    m.remove();
-                                }*/
-                                LatLng sydney = new LatLng(temp.getLatitude(), temp.getLongitude());
-
-                                String snippet= "Name: "+temp.getName()+"\n"+
-                                        "FatherName: " + temp.getFatherName()+"\n"+
-                                        "Email: "+temp.getEmail()+"\n"+
-                                        "Mobile: "+temp.getMobile()+"\n"+
-                                        "Education: "+temp.getEducation()+"\n"+
-                                        "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
-                                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
-
-                                builder.include(sydney);
-                                if(Constants.allpersionList.size()==1){
-                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
-                                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                                }
-                                // LoconLocationChanged(temp.getLatitude(),temp.getLongitude());
-
-
-
-                                /*   if(temp.getEventName().contains("Tracking"))*/
-                                hashMapMarker.put(temp.getId(),mar);
-
-                                oldtrackid=temp.getId();
-
-
-                            }
-                            mMap.setOnMarkerClickListener(MainmapActivity.this);
-                            if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
-                                Constants.isAlreadyBoud=false;
-                                LatLngBounds bounds = builder.build();
-                                int padding = 60; // offset from edges of the map in pixels
-                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                                mMap.animateCamera(cu);
-                            }
-
-
-                        }
+                        updatemapbysearch("refresh");
 
 
 
@@ -389,6 +364,72 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         }
         catch (Exception ex){
         }
+
+
+    }
+    private  void updatemapbysearch(String str){
+        if(str.contains("search")){
+            mar.remove();
+        }
+        if (Utils.isValidList(Constants.allpersionList)) {
+            builder = new LatLngBounds.Builder();
+
+
+            for (int i = 0; i < Constants.allpersionList.size(); i++) {
+
+
+                PersionResponse temp = Constants.allpersionList.get(i);
+                       /*     Log.d("List Result :", "index " + i);
+                            Log.i("hashMapMarker :", "hashMapMarker " + hashMapMarker);
+
+                            Log.d("List Result :", "First = " + temp.getRegNo());*/
+                // Marker marker = mMap.addMarker(markerOptions);
+
+
+
+
+
+                              /*  if (m != null) {
+                                    m.remove();
+                                }*/
+                LatLng sydney = new LatLng(temp.getLatitude(), temp.getLongitude());
+
+                String snippet= "Name: "+temp.getName()+"\n"+
+                        "FatherName: " + temp.getFatherName()+"\n"+
+                        "Email: "+temp.getEmail()+"\n"+
+                        "Mobile: "+temp.getMobile()+"\n"+
+                        "Education: "+temp.getEducation()+"\n"+
+                        "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
+                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
+
+                builder.include(sydney);
+                if(Constants.allpersionList.size()==1){
+                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
+                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                }
+                // LoconLocationChanged(temp.getLatitude(),temp.getLongitude());
+
+
+
+                /*   if(temp.getEventName().contains("Tracking"))*/
+                hashMapMarker.put(temp.getId(),mar);
+
+                oldtrackid=temp.getId();
+
+
+            }
+            mMap.setOnMarkerClickListener(MainmapActivity.this);
+            if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
+                Constants.isAlreadyBoud=false;
+                LatLngBounds bounds = builder.build();
+                int padding = 60; // offset from edges of the map in pixels
+                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                mMap.animateCamera(cu);
+            }
+
+
+        }
+
 
 
     }
