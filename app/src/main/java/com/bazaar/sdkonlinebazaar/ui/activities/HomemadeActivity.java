@@ -172,7 +172,7 @@ public class HomemadeActivity extends FragmentActivity implements OnMapReadyCall
             };
 
             //  Wherebouts.instance().onChange(workable);
-            startService(new Intent(this, BackgroundService.class));
+           // startService(new Intent(this, BackgroundService.class));
         }catch (Exception ex){
 
         }

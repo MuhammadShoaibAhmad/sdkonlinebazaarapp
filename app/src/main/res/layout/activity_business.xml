@@ -116,7 +116,7 @@
 
                 <include
                     android:id="@+id/module_navigationlive"
-                    layout="@layout/job_navigation"
+                    layout="@layout/enterpreneur_navigation"
                     android:layout_width="fill_parent"
                     android:layout_height="50.0dip" />
 

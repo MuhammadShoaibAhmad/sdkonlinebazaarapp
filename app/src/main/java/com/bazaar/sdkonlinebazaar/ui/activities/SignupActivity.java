@@ -102,7 +102,7 @@ public class SignupActivity extends AppCompatActivity {
 
 
         progressDialog.showProgressDialog();
-        if (Utils.isValidString(Name.getText().toString()) && Utils.isValidString(FatherName.getText().toString())) {
+        if (Utils.isValidString(Name.getText().toString()) && Utils.isValidString(FatherName.getText().toString()) && Utils.isValidString(Email.getText().toString())&& Utils.isValidString(Password.getText().toString())) {
             Call<PersionResponse> loginResponseCall = RetrofitClient.getInstance().CreatePersion(per);
             loginResponseCall.enqueue(new Callback<PersionResponse>() {
                 @Override
@@ -133,7 +133,7 @@ public class SignupActivity extends AppCompatActivity {
 
         }
         else {
-            Utils.showSnackBar(this, "Invalid Inputs ..!!");
+            Utils.showSnackBar(this, "Please Enter All Inputs ..!!");
         }
 
     }

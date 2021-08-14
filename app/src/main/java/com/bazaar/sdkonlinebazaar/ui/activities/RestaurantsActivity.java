@@ -172,7 +172,7 @@ public class RestaurantsActivity extends FragmentActivity implements OnMapReadyC
             };
 
             //  Wherebouts.instance().onChange(workable);
-            startService(new Intent(this, BackgroundService.class));
+           // startService(new Intent(this, BackgroundService.class));
         }catch (Exception ex){
 
         }

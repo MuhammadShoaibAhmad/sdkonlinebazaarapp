@@ -12,8 +12,20 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.activities.SpecializdActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.JobseekerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.BusinessActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.EnterpreneurActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.activities.MarrageActivity"
             android:exported="true" />

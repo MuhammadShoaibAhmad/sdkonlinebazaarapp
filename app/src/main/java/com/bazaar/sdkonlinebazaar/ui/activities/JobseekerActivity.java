@@ -1,94 +1,94 @@
 package com.bazaar.sdkonlinebazaar.ui.activities;
 
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentActivity;
+        import android.os.Bundle;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Intent;
-import android.content.IntentSender;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-import android.provider.Settings;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+        import com.bazaar.sdkonlinebazaar.R;
 
-import com.bazaar.sdkonlinebazaar.BuildConfig;
-import com.bazaar.sdkonlinebazaar.R;
-import com.bazaar.sdkonlinebazaar.constants.Constants;
-import com.bazaar.sdkonlinebazaar.data.Network.RetrofitClient;
-import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
-import com.bazaar.sdkonlinebazaar.ui.adapters.MarkerInfoWindowAdapter;
-import com.bazaar.sdkonlinebazaar.utils.BackgroundService;
-import com.bazaar.sdkonlinebazaar.utils.ProgressDialog;
-import com.bazaar.sdkonlinebazaar.utils.Utils;
-import com.bazaar.sdkonlinebazaar.utils.Wherebouts;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.core.Context;
-import com.karumi.dexter.Dexter;
-import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
-import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
+        import androidx.annotation.NonNull;
+        import androidx.core.app.ActivityCompat;
+        import androidx.core.view.GravityCompat;
+        import androidx.drawerlayout.widget.DrawerLayout;
+        import androidx.fragment.app.FragmentActivity;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+        import android.Manifest;
+        import android.annotation.SuppressLint;
+        import android.app.Activity;
+        import android.content.Intent;
+        import android.content.IntentSender;
+        import android.content.pm.PackageManager;
+        import android.net.Uri;
+        import android.os.AsyncTask;
+        import android.os.Bundle;
+        import android.os.Handler;
+        import android.os.Looper;
+        import android.os.Message;
+        import android.provider.Settings;
+        import android.util.Log;
+        import android.view.Gravity;
+        import android.view.View;
+        import android.widget.ImageView;
+        import android.widget.LinearLayout;
+        import android.widget.TextView;
+        import android.widget.Toast;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+        import com.bazaar.sdkonlinebazaar.BuildConfig;
+        import com.bazaar.sdkonlinebazaar.R;
+        import com.bazaar.sdkonlinebazaar.constants.Constants;
+        import com.bazaar.sdkonlinebazaar.data.Network.RetrofitClient;
+        import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
+        import com.bazaar.sdkonlinebazaar.ui.adapters.MarkerInfoWindowAdapter;
+        import com.bazaar.sdkonlinebazaar.utils.BackgroundService;
+        import com.bazaar.sdkonlinebazaar.utils.ProgressDialog;
+        import com.bazaar.sdkonlinebazaar.utils.Utils;
+        import com.bazaar.sdkonlinebazaar.utils.Wherebouts;
+        import com.google.android.gms.common.api.ApiException;
+        import com.google.android.gms.common.api.ResolvableApiException;
+        import com.google.android.gms.location.LocationCallback;
+        import com.google.android.gms.location.LocationRequest;
+        import com.google.android.gms.location.LocationResult;
+        import com.google.android.gms.location.LocationServices;
+        import com.google.android.gms.location.LocationSettingsRequest;
+        import com.google.android.gms.location.LocationSettingsResponse;
+        import com.google.android.gms.location.LocationSettingsStatusCodes;
+        import com.google.android.gms.maps.CameraUpdate;
+        import com.google.android.gms.maps.CameraUpdateFactory;
+        import com.google.android.gms.maps.GoogleMap;
+        import com.google.android.gms.maps.OnMapReadyCallback;
+        import com.google.android.gms.maps.SupportMapFragment;
+        import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+        import com.google.android.gms.maps.model.CameraPosition;
+        import com.google.android.gms.maps.model.LatLng;
+        import com.google.android.gms.maps.model.LatLngBounds;
+        import com.google.android.gms.maps.model.Marker;
+        import com.google.android.gms.maps.model.MarkerOptions;
+        import com.google.android.gms.tasks.OnFailureListener;
+        import com.google.android.gms.tasks.OnSuccessListener;
+        import com.google.firebase.database.core.Context;
+        import com.karumi.dexter.Dexter;
+        import com.karumi.dexter.PermissionToken;
+        import com.karumi.dexter.listener.PermissionDeniedResponse;
+        import com.karumi.dexter.listener.PermissionGrantedResponse;
+        import com.karumi.dexter.listener.PermissionRequest;
+        import com.karumi.dexter.listener.single.PermissionListener;
+
+        import java.text.DateFormat;
+        import java.util.Date;
+        import java.util.HashMap;
+        import java.util.List;
+
+        import retrofit2.Call;
+        import retrofit2.Callback;
+        import retrofit2.Response;
 
 
-public class MainmapActivity extends FragmentActivity implements OnMapReadyCallback,GoogleMap.OnMarkerClickListener {
+public class JobseekerActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     DrawerLayout navDrawer;
     private ProgressDialog progressDialog;
     private LinearLayout settingLayout;
     private List<PersionResponse> allpersionList;
-    LatLngBounds.Builder builder;
+    private LatLngBounds.Builder builder;
     private Marker mar;
 
     private int mInterval = 5000; // 5 seconds by default, can be changed later
@@ -97,12 +97,10 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
     private TextView menuName;
     private PersionResponse per;
-
-    private List<Marker> AllMarkers = new ArrayList<Marker>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+        setContentView(R.layout.activity_jobseeker);
         bindViews();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -172,7 +170,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
             };
 
             //  Wherebouts.instance().onChange(workable);
-          //  startService(new Intent(this, BackgroundService.class));
+            // startService(new Intent(this, BackgroundService.class));
         }catch (Exception ex){
 
         }
@@ -186,41 +184,6 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         per=new PersionResponse();
         menuName = findViewById(R.id.menuName);
         menuName.setText(Constants.Name);
-
-
-        EditText editText = findViewById(R.id.edittextSearch);
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                filter(s.toString());
-            }
-        });
-    }
-
-    private void filter(String text) {
-
-       if(text.isEmpty()){
-           startRepeatingTask();
-       }
-
-        stopRepeatingTask();
-        List<PersionResponse> filteredList=new ArrayList<PersionResponse>();
-        for (PersionResponse item :  Constants.allpersionList) {
-            if (item.getProfession().toLowerCase().contains(text.toLowerCase())) {
-                filteredList.add(item);
-                //Toast.makeText(MainmapActivity.this, "Response ..!!"+item, Toast.LENGTH_SHORT).show();
-            }
-        }
-
-        Constants.allpersionList=filteredList;
-
-        updatemapbysearch("search");
 
     }
 
@@ -262,27 +225,14 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
         }
 
+        mar = mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(latitude, longitude))
+                .anchor(0.5f, 0.5f)
+                .title(Name)
+                .snippet(snippet)
+                //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_icon)));
 
-       /* if(ModuleID.contains("2")){
-            mar = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(latitude, longitude))
-                    .anchor(0.5f, 0.5f)
-                    .title(Name)
-                    .snippet(snippet)
-                    //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_food)));
-        }else{*/
-            mar = mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(latitude, longitude))
-                    .anchor(0.5f, 0.5f)
-                    .title(Name)
-                    .snippet(snippet)
-                    //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_icon)));
-      /*  }
-*/
-
-        AllMarkers.add(mar);
         return mar;
     }
 
@@ -347,7 +297,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
         try{
             // progressDialog.showProgressDialog();
-            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().getPersionInfo();
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleAndTypeId(1,2);
             getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
                 @Override
                 public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {
@@ -359,54 +309,22 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                         AsyncCaller asas=new AsyncCaller();
                         asas.doInBackground();
 
-                        updatemapbysearch("refresh");
 
 
 
-                    } else {
-                        // Utils.showSnackBar(AllVehiclesActivity.this, "Invalid Response ..!!");
-
-                        Toast.makeText(MainmapActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<List<PersionResponse>> call, Throwable t) {
-                    progressDialog.hideProgressDialog();
-                    Utils.showSnackBar(MainmapActivity.this, "Something Went Wrong ..!!");
-
-                    Toast.makeText(MainmapActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
-        catch (Exception ex){
-        }
+                        if (Utils.isValidList(Constants.allpersionList)) {
+                            builder = new LatLngBounds.Builder();
 
 
-    }
-    private  void updatemapbysearch(String str){
-
-        if(str.contains("search")){
-            for (Marker mLocationMarker: AllMarkers) {
-                mLocationMarker.remove();
-            }
-            AllMarkers.clear();
-        }
-        if (Utils.isValidList(Constants.allpersionList)) {
-            builder = new LatLngBounds.Builder();
+                            for (int i = 0; i < Constants.allpersionList.size(); i++) {
 
 
-            for (int i = 0; i < Constants.allpersionList.size(); i++) {
-
-
-                PersionResponse temp = Constants.allpersionList.get(i);
+                                PersionResponse temp = Constants.allpersionList.get(i);
                        /*     Log.d("List Result :", "index " + i);
                             Log.i("hashMapMarker :", "hashMapMarker " + hashMapMarker);
 
                             Log.d("List Result :", "First = " + temp.getRegNo());*/
-                // Marker marker = mMap.addMarker(markerOptions);
+                                // Marker marker = mMap.addMarker(markerOptions);
 
 
 
@@ -415,44 +333,66 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                               /*  if (m != null) {
                                     m.remove();
                                 }*/
-                LatLng sydney = new LatLng(temp.getLatitude(), temp.getLongitude());
+                                LatLng sydney = new LatLng(temp.getLatitude(), temp.getLongitude());
 
-                String snippet= "Name: "+temp.getName()+"\n"+
-                        "FatherName: " + temp.getFatherName()+"\n"+
-                        "Email: "+temp.getEmail()+"\n"+
-                        "Mobile: "+temp.getMobile()+"\n"+
-                        "Education: "+temp.getEducation()+"\n"+
-                        "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
-                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
+                                String snippet= "Name: "+temp.getName()+"\n"+
+                                        "FatherName: " + temp.getFatherName()+"\n"+
+                                        "Email: "+temp.getEmail()+"\n"+
+                                        "Mobile: "+temp.getMobile()+"\n"+
+                                        "Education: "+temp.getEducation()+"\n"+
+                                        "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
+                                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
 
-                builder.include(sydney);
-                if(Constants.allpersionList.size()==1){
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
-                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                                builder.include(sydney);
+                                if(Constants.allpersionList.size()==1){
+                                    CameraPosition cameraPosition = new CameraPosition.Builder().target(sydney).zoom(16).build();
+                                    mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                                }
+                                // LoconLocationChanged(temp.getLatitude(),temp.getLongitude());
+
+
+
+                                /*   if(temp.getEventName().contains("Tracking"))*/
+                                hashMapMarker.put(temp.getId(),mar);
+
+                                oldtrackid=temp.getId();
+
+
+                            }
+                            mMap.setOnMarkerClickListener(JobseekerActivity.this);
+                            if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
+                                Constants.isAlreadyBoud=false;
+                                LatLngBounds bounds = builder.build();
+                                int padding = 60; // offset from edges of the map in pixels
+                                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+                                mMap.animateCamera(cu);
+                            }
+
+
+                        }
+
+
+
+                    } else {
+                        // Utils.showSnackBar(AllVehiclesActivity.this, "Invalid Response ..!!");
+
+                        Toast.makeText(JobseekerActivity.this, "Invalid Response ..!!", Toast.LENGTH_SHORT).show();
+
+                    }
                 }
-                // LoconLocationChanged(temp.getLatitude(),temp.getLongitude());
 
+                @Override
+                public void onFailure(Call<List<PersionResponse>> call, Throwable t) {
+                    progressDialog.hideProgressDialog();
+                    Utils.showSnackBar(JobseekerActivity.this, "Something Went Wrong ..!!");
 
-
-                /*   if(temp.getEventName().contains("Tracking"))*/
-                hashMapMarker.put(temp.getId(),mar);
-
-                oldtrackid=temp.getId();
-
-
-            }
-            mMap.setOnMarkerClickListener(MainmapActivity.this);
-            if(Constants.allpersionList.size()>1 && Constants.isAlreadyBoud){
-                Constants.isAlreadyBoud=false;
-                LatLngBounds bounds = builder.build();
-                int padding = 60; // offset from edges of the map in pixels
-                CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-                mMap.animateCamera(cu);
-            }
-
+                    Toast.makeText(JobseekerActivity.this, "Something Went Wrong ..!!" +t, Toast.LENGTH_SHORT).show();
+                }
+            });
 
         }
-
+        catch (Exception ex){
+        }
 
 
     }
@@ -540,10 +480,10 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void signOut(View view) {
-        Intent i = new Intent(MainmapActivity.this, LoginActivity.class);
+        Intent i = new Intent(JobseekerActivity.this, LoginActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MainmapActivity.this.startActivity(i);
+        JobseekerActivity.this.startActivity(i);
     }
 
 
@@ -560,8 +500,8 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 5000;
     private void init() {
         try {
-            Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(MainmapActivity.this);
-            Constants.mSettingsClient = LocationServices.getSettingsClient(MainmapActivity.this);
+            Constants.mFusedLocationClient = LocationServices.getFusedLocationProviderClient(JobseekerActivity.this);
+            Constants.mSettingsClient = LocationServices.getSettingsClient(JobseekerActivity.this);
 
             Constants.mLocationCallback = new LocationCallback() {
                 @Override
@@ -629,14 +569,14 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                         if (response.body() != null) {
 
                         } else {
-                            Utils.showSnackBar(MainmapActivity.this, "Invalid user ..!!");
+                            Utils.showSnackBar(JobseekerActivity.this, "Invalid user ..!!");
                         }
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
                         progressDialog.hideProgressDialog();
-                        Utils.showSnackBar(MainmapActivity.this, "Something went wrong ..!!");
+                        Utils.showSnackBar(JobseekerActivity.this, "Something went wrong ..!!");
                         Log.e("TAG", t.getMessage());
                     }
                 });
@@ -681,7 +621,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                         // Show the dialog by calling startResolutionForResult(), and check the
                                         // result in onActivityResult().
                                         ResolvableApiException rae = (ResolvableApiException) e;
-                                        rae.startResolutionForResult(MainmapActivity.this, Constants.REQUEST_CHECK_SETTINGS);
+                                        rae.startResolutionForResult(JobseekerActivity.this, Constants.REQUEST_CHECK_SETTINGS);
                                     } catch (IntentSender.SendIntentException sie) {
                                         Log.i("TAG", "PendingIntent unable to execute request.");
                                     }
@@ -691,7 +631,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                             "fixed here. Fix in Settings.";
                                     Log.e("TAG", errorMessage);
 
-                                    Toast.makeText(MainmapActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+                                    Toast.makeText(JobseekerActivity.this, errorMessage, Toast.LENGTH_LONG).show();
                             }
 
                             updateLocationUI();
@@ -786,24 +726,24 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
 
     public void eventprofileclick(View view){
-        Intent intent = new Intent(MainmapActivity.this, ProfileActivity.class);
+        Intent intent = new Intent(JobseekerActivity.this, ProfileActivity.class);
         startActivity(intent);
     }
 
     public void contectUstitleclick(View view){
-        Intent intent = new Intent(MainmapActivity.this, ContactusActivity.class);
+        Intent intent = new Intent(JobseekerActivity.this, ContactusActivity.class);
         startActivity(intent);
     }
     public void gotoFoodActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, FoodActivity.class);
+        Intent intent = new Intent(JobseekerActivity.this, FoodActivity.class);
         startActivity(intent);
     }
     public void gotoJobActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, JobActivity.class);
+        Intent intent = new Intent(JobseekerActivity.this, JobActivity.class);
         startActivity(intent);
     }
     public void gotoMarrageActivity(View view){
-        Intent intent = new Intent(MainmapActivity.this, MarrageActivity.class);
+        Intent intent = new Intent(JobseekerActivity.this, MarrageActivity.class);
         startActivity(intent);
     }
 

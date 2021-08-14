@@ -172,7 +172,7 @@ public class FoodActivity extends FragmentActivity implements OnMapReadyCallback
             };
 
             //  Wherebouts.instance().onChange(workable);
-            startService(new Intent(this, BackgroundService.class));
+          //  startService(new Intent(this, BackgroundService.class));
         }catch (Exception ex){
 
         }
@@ -742,6 +742,11 @@ public class FoodActivity extends FragmentActivity implements OnMapReadyCallback
     }
     public void gotoJobActivity(View view){
         Intent intent = new Intent(FoodActivity.this, JobActivity.class);
+        startActivity(intent);
+    }
+
+    public void gotoMarrageActivity(View view){
+        Intent intent = new Intent(FoodActivity.this, MarrageActivity.class);
         startActivity(intent);
     }
 

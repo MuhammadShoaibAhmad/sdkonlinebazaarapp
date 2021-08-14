@@ -107,25 +107,25 @@
             </RelativeLayout>
 
 
-            <RelativeLayout
-                android:id="@+id/action_barlive1"
-                android:layout_width="fill_parent"
-                android:layout_height="50.0dip"
-                android:layout_below="@+id/action_barlive"
-                android:background="@drawable/background_white_with_grey_border">
+            <!--      <RelativeLayout
+                      android:id="@+id/action_barlive1"
+                      android:layout_width="fill_parent"
+                      android:layout_height="50.0dip"
+                      android:layout_below="@+id/action_barlive"
+                      android:background="@drawable/background_white_with_grey_border">
 
-                <include
-                    android:id="@+id/module_navigationlive"
-                    layout="@layout/job_navigation"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50.0dip" />
+                      <include
+                          android:id="@+id/module_navigationlive"
+                          layout="@layout/food_navigation"
+                          android:layout_width="fill_parent"
+                          android:layout_height="50.0dip" />
 
-            </RelativeLayout>
+                  </RelativeLayout>-->
             <RelativeLayout
                 android:id="@+id/content_layoutlive"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@+id/action_barlive1"
+                android:layout_below="@+id/action_barlive"
                 android:layout_alignParentStart="true"
                 android:orientation="vertical">
 
@@ -241,7 +241,8 @@
                             android:layout_centerInParent="true"
                             android:onClick="centerallmarkers"
                             android:padding="5.0dip"
-                            android:src="@drawable/ic_apps_black_24px" />
+                            android:src="@drawable/ic_apps_black_24px"
+                            />
                     </RelativeLayout>
                     <!--   app:tint="@color/blueDark"-->
                     <RelativeLayout
