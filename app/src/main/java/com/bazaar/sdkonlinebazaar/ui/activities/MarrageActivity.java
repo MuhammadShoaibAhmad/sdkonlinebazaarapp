@@ -751,23 +751,29 @@ public class MarrageActivity extends FragmentActivity implements OnMapReadyCallb
         startActivity(intent);
     }
     public void gotoMuslimActivity(View view){
+
+        Constants.MarrageModulesTypesID=5;
    /*     Intent intent = new Intent(MarrageActivity.this, FoodActivity.class);
         startActivity(intent);*/
     }
     public void gotoChristianActivity(View view){
+        Constants.MarrageModulesTypesID=6;
      /*   Intent intent = new Intent(MarrageActivity.this, JobActivity.class);
         startActivity(intent);*/
     }
 
     public void gotoHinduActivity(View view){
+        Constants.MarrageModulesTypesID=8;
       /*  Intent intent = new Intent(MarrageActivity.this, JobseekerActivity.class);
         startActivity(intent);*/
     }
     public void gotoSikhActivity(View view){
+        Constants.MarrageModulesTypesID=7;
        /* Intent intent = new Intent(MarrageActivity.this, SpecializdActivity.class);
         startActivity(intent);*/
     }
     public void gotoBuddhistActivity(View view){
+        Constants.MarrageModulesTypesID=5;
  /*       Intent intent = new Intent(MarrageActivity.this, SpecializdActivity.class);
         startActivity(intent);*/
     }

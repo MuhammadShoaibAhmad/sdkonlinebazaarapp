@@ -3,6 +3,7 @@ package com.bazaar.sdkonlinebazaar.ui.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -41,10 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
     private List<ModulesResponse> allModuleTypeList;
     private ProgressDialog progressDialog;
     private Button updateprofile;
-
-    private EditText Name, FatherName,Mobile,Profession,Education,Email,Password;
+    private PersionResponse per;
+    private EditText Name, FatherName,Mobile,Profession,Education,Email,Password,Salary;
     private RadioGroup radioGender,radioModules;
-    private RadioButton radioMalepro,radioFemalepro,radioJobpro,radioFoodpro,radioMarriageBureaupro;
+    private RadioButton radioMalepro,radioFemalepro,radioJobpro,radioFoodpro,radioMarriageBureaupro,radioButtonGender,radioButtonModules;;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void bindViews() {
         progressDialog = new ProgressDialog(this, Constants.verifyMsg);
 
-
+        per=new PersionResponse();
         updateprofile = findViewById(R.id.updateprofile);
         Name = findViewById(R.id.Namepro);
         FatherName = findViewById(R.id.FatherNamepro);
@@ -64,9 +65,9 @@ public class ProfileActivity extends AppCompatActivity {
         Profession = findViewById(R.id.Professionpro);
         Education = findViewById(R.id.Educationpro);
         Email = findViewById(R.id.Emailpro);
-
-  /*      Email = findViewById(R.id.Emailpro);
-        Mobile = findViewById(R.id.Mobile);*/
+        Password = findViewById(R.id.Password);
+        Salary = findViewById(R.id.Salary);
+        /*Mobile = findViewById(R.id.Mobile);*/
 
         radioGender = findViewById(R.id.radioGenderpro);
         radioModules = findViewById(R.id.moduleradiopro);
@@ -77,10 +78,11 @@ public class ProfileActivity extends AppCompatActivity {
         Profession.setText(Constants.Profession);
         Education.setText(Constants.Education);
         Email.setText(Constants.Email);
+        Password.setText(Constants.Password);
+        Salary.setText(Constants.Salary);
 
-
-        radioMalepro = findViewById(R.id.radioMalepro);
-        radioFemalepro = findViewById(R.id.radioFemalepro);
+        radioGender = findViewById(R.id.radioGenderpro);
+        radioModules = findViewById(R.id.moduleradiopro);
 
         radioMalepro = findViewById(R.id.radioMalepro);
         radioFemalepro = findViewById(R.id.radioFemalepro);
@@ -116,10 +118,12 @@ public class ProfileActivity extends AppCompatActivity {
         getAllModule(3);
     }
 
-    public void desplayspinnerData(SpinnerArray sa){
-    /*    name = sa.getName();
-        id = sa.getId();
-        Toast.makeText(this,name, Toast.LENGTH_LONG).show();*/
+    private void desplayspinnerData(SpinnerArray sa){
+       String name = sa.getName();
+       int id = sa.getId();
+
+       Constants.ModulesTypesID=id;
+        /*  Toast.makeText(this,name, Toast.LENGTH_LONG).show();*/
     }
 
     private void setSpinnerValues() {
@@ -146,7 +150,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void getAllModule(int ModuleID) {
+    private void getAllModule(int ModuleID) {
 
         try{
             // progressDialog.showProgressDialog();
@@ -185,6 +189,110 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     }
+
+    public void persionUpdate(View view) {
+
+ /*       tbl.Email = mod.Email;
+        tbl.Password = mod.Password;
+        tbl.MonthlyIncome = mod.MonthlyIncome;
+        tbl.Mobile = mod.Mobile;
+        tbl.Profession = mod.Profession;
+        tbl.Education = mod.Education;
+        tbl.ModuleID = mod.ModuleID;
+        tbl.ModulesTypesID = mod.ModulesTypesID;
+        tbl.MonthlyIncome = mod.MonthlyIncome;*/
+        per.setId(Constants.ID);
+        per.setName(Name.getText().toString());
+        per.setFatherName(FatherName.getText().toString());
+        per.setMobile(Mobile.getText().toString());
+        per.setProfession(Profession.getText().toString());
+        per.setEducation(Education.getText().toString());
+        per.setEmail(Email.getText().toString());
+        per.setLoginName(Email.getText().toString());
+        per.setPassword(Password.getText().toString());
+        per.setMonthlyIncome(Salary.getText().toString());
+        per.setModulesTypesID(Constants.ModulesTypesID);
+        // get selected radio button from radioGroup
+      /*  int selectedId = radioGender.getCheckedRadioButtonId();
+        int moduleId = radioModules.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        radioGender =  findViewById(selectedId);
+        radioModules =  findViewById(moduleId);
+        int gender =  (radioGender.getId());
+        int module=  (radioModules.getId());
+        per.setGenderID(gender);
+        per.setModuleID(module);*/
+
+        // get selected radio button from radioGroup
+        int selectedId = radioGender.getCheckedRadioButtonId();
+        int moduleId = radioModules.getCheckedRadioButtonId();
+        // find the radiobutton by returned id
+        radioButtonGender =  findViewById(selectedId);
+        radioButtonModules =  findViewById(moduleId);
+        String gender=  (radioButtonGender.getText().toString());
+        String module=  (radioButtonModules.getText().toString());
+        if(gender.contains("Male")){
+            per.setGenderID(1);
+        }else{
+            per.setGenderID(2);
+        }
+        if(module.contains("Job")){
+            per.setModuleID(1);
+        }else if(module.contains("Food")){
+            per.setModuleID(2);
+        }else {
+            per.setModuleID(3);
+        }
+
+
+     /*   if(gender.contains("Male")){
+            per.setGenderID(1);
+        }else{
+            per.setGenderID(2);
+        }
+        if(module.contains("Job")){
+            per.setModuleID(1);
+        }else if(module.contains("Food")){
+            per.setModuleID(2);
+        }else {
+            per.setModuleID(3);
+        }*/
+
+
+        progressDialog.showProgressDialog();
+
+       /* if (Utils.isValidString(Name.getText().toString()) && Utils.isValidString(FatherName.getText().toString()) && Utils.isValidString(Email.getText().toString())&& Utils.isValidString(Password.getText().toString())) {*/
+            Call<String> profileUpdateResponseCall = RetrofitClient.getInstance().UpdatePersonInfo(per);
+            profileUpdateResponseCall.enqueue(new Callback<String>() {
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    progressDialog.hideProgressDialog();
+                    if (response.body() != null) {
+                        String signupResponse = response.body();
+
+                            progressDialog.hideProgressDialog();
+                            Utils.showSnackBar(ProfileActivity.this, "Profile Successfull Updated ..!!");
+
+                    } else {
+                        Utils.showSnackBar(ProfileActivity.this, "Not  Updated Please Check Fields ..!!");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    progressDialog.hideProgressDialog();
+                    Utils.showSnackBar(ProfileActivity.this, "Something went wrong ..!!");
+                    Log.e("TAG", t.getMessage());
+                }
+            });
+
+       /* }*/
+       /* else {
+            Utils.showSnackBar(this, "Please Enter All Inputs ..!!");
+        }
+*/
+    }
+
 }
 
 

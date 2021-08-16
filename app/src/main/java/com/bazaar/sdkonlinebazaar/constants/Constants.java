@@ -37,6 +37,7 @@ public class Constants {
     public static String FatherName="";
     public static int ModuleID=-1;
     public static int ModulesTypesID=-1;
+    public static int MarrageModulesTypesID=5;
     public static double Latitude=0.0;
     public static double Longitude=0.0;
 
@@ -45,6 +46,10 @@ public class Constants {
     public static String Education="";
     public static String Email="";
     public static int Gender=-1;
+    public static String Salary="";
+    public static String Password="";
+
+
 
 
 

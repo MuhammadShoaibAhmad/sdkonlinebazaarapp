@@ -298,7 +298,7 @@ public class EnterpreneurActivity extends FragmentActivity implements OnMapReady
 
         try{
             // progressDialog.showProgressDialog();
-            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleId(1);
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleAndTypeId(1,3);
             getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
                 @Override
                 public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {

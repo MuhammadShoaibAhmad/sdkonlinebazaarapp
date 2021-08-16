@@ -299,7 +299,7 @@ public class RestaurantsActivity extends FragmentActivity implements OnMapReadyC
 
         try{
             // progressDialog.showProgressDialog();
-            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleAndTypeId(1,1);
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleAndTypeId(2,1);
             getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
                 @Override
                 public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {

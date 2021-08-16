@@ -53,12 +53,10 @@ public class RetrofitClient {
         );
 
 
-     /*   @FormUrlEncoded
-        @POST("Account/CreatePersion")
-        Call<PersionResponse> CreatePersion(
-                @Field("UserName") String userName,
-                @Field("Password") String password
-        );*/
+        @POST("Main/UpdatePersioninfo")
+        Call<String> UpdatePersonInfo(
+                @Body PersionResponse post
+        );
 
 
 

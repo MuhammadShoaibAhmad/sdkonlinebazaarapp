@@ -299,7 +299,7 @@ public class BusinessActivity extends FragmentActivity implements OnMapReadyCall
 
         try{
             // progressDialog.showProgressDialog();
-            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleId(1);
+            Call<List<PersionResponse>> getpersionCall = RetrofitClient.getInstance().GetPersonByModuleAndTypeId(1,4);
             getpersionCall.enqueue(new Callback<List<PersionResponse>>() {
                 @Override
                 public void onResponse(Call<List<PersionResponse>> call, Response<List<PersionResponse>> response) {
