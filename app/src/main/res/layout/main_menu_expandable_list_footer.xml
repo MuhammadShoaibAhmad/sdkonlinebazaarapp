@@ -157,7 +157,7 @@
             android:focusable="false"
             android:gravity="center|left"
             android:maxLines="1"
-            android:text="Marrage"
+            android:text="Marriage"
             android:textColor="@color/greyDarker"
             android:textSize="16.0sp" />
 

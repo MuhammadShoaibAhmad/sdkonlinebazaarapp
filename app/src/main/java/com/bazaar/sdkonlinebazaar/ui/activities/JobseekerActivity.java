@@ -746,6 +746,9 @@ public class JobseekerActivity extends FragmentActivity implements OnMapReadyCal
         Intent intent = new Intent(JobseekerActivity.this, MarrageActivity.class);
         startActivity(intent);
     }
-
+    public void gotoMainActivityseeker(View view){
+        Intent intent = new Intent(JobseekerActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
 
 }

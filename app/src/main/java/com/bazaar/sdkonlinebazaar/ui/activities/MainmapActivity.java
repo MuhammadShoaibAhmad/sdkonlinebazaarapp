@@ -95,7 +95,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private Handler mHandler;
     public final static int SENDING = 1;
 
-    private TextView menuName;
+    private TextView menuName,menuEmail,menuMobile;
     private PersionResponse per;
 
     private List<Marker> AllMarkers = new ArrayList<Marker>();
@@ -185,7 +185,13 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         settingLayout=(LinearLayout) findViewById(R.id.settingLayoutlive);
         per=new PersionResponse();
         menuName = findViewById(R.id.menuName);
+        menuEmail = findViewById(R.id.menuEmail);
+        menuMobile = findViewById(R.id.menuMobile);
         menuName.setText(Constants.Name);
+        menuEmail.setText(Constants.Email);
+        menuMobile.setText(Constants.Mobile);
+
+
 
 
         EditText editText = findViewById(R.id.edittextSearch);

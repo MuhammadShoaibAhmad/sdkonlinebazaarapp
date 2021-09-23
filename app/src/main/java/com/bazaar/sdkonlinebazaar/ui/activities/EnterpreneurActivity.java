@@ -753,5 +753,8 @@ public class EnterpreneurActivity extends FragmentActivity implements OnMapReady
         startActivity(intent);
     }
 
-
+    public void gotoMainActivityenter(View view){
+        Intent intent = new Intent(EnterpreneurActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
 }

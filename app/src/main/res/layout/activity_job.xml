@@ -57,6 +57,7 @@
                         android:layout_height="fill_parent"
                         android:layout_marginTop="13.0dip"
                         android:layout_marginBottom="10.0dip"
+                        android:onClick="gotoMainActivityjob"
                         android:adjustViewBounds="true"
                         android:text="SDK ONLINE BAZAAR"
                         android:textColor="@color/black"/>

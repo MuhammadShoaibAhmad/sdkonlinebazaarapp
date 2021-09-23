@@ -749,5 +749,10 @@ public class RestaurantsActivity extends FragmentActivity implements OnMapReadyC
         startActivity(intent);
     }
 
+    public void gotoMainActivity(View view){
+        Intent intent = new Intent(RestaurantsActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
+
 
 }

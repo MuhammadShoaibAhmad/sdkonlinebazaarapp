@@ -778,4 +778,9 @@ public class MarrageActivity extends FragmentActivity implements OnMapReadyCallb
         startActivity(intent);*/
     }
 
+    public void gotoMainActivity(View view){
+        Intent intent = new Intent(MarrageActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
+
 }

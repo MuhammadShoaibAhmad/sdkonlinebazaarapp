@@ -758,6 +758,9 @@ public class FoodActivity extends FragmentActivity implements OnMapReadyCallback
         Intent intent = new Intent(FoodActivity.this, HomemadeActivity.class);
         startActivity(intent);
     }
-
+    public void gotoMainActivityfood(View view){
+        Intent intent = new Intent(FoodActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
 
 }

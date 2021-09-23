@@ -70,6 +70,20 @@
                 android:inputType="text" />
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/linearLayout_dob_container"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/DOB"
+                style="@style/LoginEditText"
+                android:layout_weight="0.5"
+                android:hint="DOB"
+                />
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/linearLayout_password_container7"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"

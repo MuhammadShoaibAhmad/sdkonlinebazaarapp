@@ -748,6 +748,9 @@ public class HomemadeActivity extends FragmentActivity implements OnMapReadyCall
         Intent intent = new Intent(HomemadeActivity.this, MarrageActivity.class);
         startActivity(intent);
     }
-
+    public void gotoMainActivityhomemade(View view){
+        Intent intent = new Intent(HomemadeActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
 
 }

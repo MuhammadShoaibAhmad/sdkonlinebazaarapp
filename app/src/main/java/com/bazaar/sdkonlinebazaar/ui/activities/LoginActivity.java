@@ -100,6 +100,7 @@ public class LoginActivity extends AppCompatActivity {
                            Constants.ID= signinResponse.getId();
                             Constants.Name= signinResponse.getName();
                             Constants.FatherName= signinResponse.getFatherName();
+                            Constants.DOB= signinResponse.getDOB();
                             Constants.ModuleID= signinResponse.getModuleID();
                             Constants.Gender= signinResponse.getGenderID();
                             Constants.ModulesTypesID= signinResponse.getModulesTypesID();

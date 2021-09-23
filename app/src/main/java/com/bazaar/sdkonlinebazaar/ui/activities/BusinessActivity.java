@@ -85,6 +85,7 @@ package com.bazaar.sdkonlinebazaar.ui.activities;
 
 public class BusinessActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
+
     private GoogleMap mMap;
     DrawerLayout navDrawer;
     private ProgressDialog progressDialog;

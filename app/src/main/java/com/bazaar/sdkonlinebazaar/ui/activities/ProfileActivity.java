@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private Button updateprofile;
     private PersionResponse per;
-    private EditText Name, FatherName,Mobile,Profession,Education,Email,Password,Salary;
+    private EditText Name, FatherName,Mobile,Profession,Education,Email,Password,Salary,DOBpro;
     private RadioGroup radioGender,radioModules;
     private RadioButton radioMalepro,radioFemalepro,radioJobpro,radioFoodpro,radioMarriageBureaupro,radioButtonGender,radioButtonModules;;
     @Override
@@ -67,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
         Email = findViewById(R.id.Emailpro);
         Password = findViewById(R.id.Password);
         Salary = findViewById(R.id.Salary);
+        DOBpro = findViewById(R.id.DOBpro);
         /*Mobile = findViewById(R.id.Mobile);*/
 
         radioGender = findViewById(R.id.radioGenderpro);
@@ -74,6 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Name.setText(Constants.Name);
         FatherName.setText(Constants.FatherName);
+        DOBpro.setText(Constants.DOB);
         Mobile.setText(Constants.Mobile);
         Profession.setText(Constants.Profession);
         Education.setText(Constants.Education);

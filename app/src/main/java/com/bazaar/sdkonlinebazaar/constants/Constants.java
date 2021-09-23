@@ -35,6 +35,7 @@ public class Constants {
     public static  int ID = -1;
     public static String Name="" ;
     public static String FatherName="";
+    public static String DOB="";
     public static int ModuleID=-1;
     public static int ModulesTypesID=-1;
     public static int MarrageModulesTypesID=5;

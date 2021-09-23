@@ -84,6 +84,10 @@ public class PersionResponse {
     @Expose
     private Double longitude;
 
+    @SerializedName("DOB")
+    @Expose
+    private String dob;
+
     public Integer getId() {
         return id;
     }
@@ -290,5 +294,14 @@ public class PersionResponse {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+
+    public String getDOB() {
+        return dob;
+    }
+
+    public void setDOB(String dob) {
+        this.dob = dob;
     }
 }

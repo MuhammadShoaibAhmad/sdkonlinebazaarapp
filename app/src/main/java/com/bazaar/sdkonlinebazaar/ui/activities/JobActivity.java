@@ -758,6 +758,9 @@ public class JobActivity extends FragmentActivity implements OnMapReadyCallback,
         Intent intent = new Intent(JobActivity.this, BusinessActivity.class);
         startActivity(intent);
     }
-
+    public void gotoMainActivityjob(View view){
+        Intent intent = new Intent(JobActivity.this, MainmapActivity.class);
+        startActivity(intent);
+    }
 
 }
