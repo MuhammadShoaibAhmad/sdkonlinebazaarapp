@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -21,9 +22,13 @@ import android.os.Message;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -281,8 +286,9 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
             mar = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
                     .anchor(0.5f, 0.5f)
-                    .title(Name)
+                    .title(String.valueOf(ID))
                     .snippet(snippet)
+
                     //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_icon)));
       /*  }
@@ -423,12 +429,13 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                                 }*/
                 LatLng sydney = new LatLng(temp.getLatitude(), temp.getLongitude());
 
-                String snippet= "Name: "+temp.getName()+"\n"+
-                        "FatherName: " + temp.getFatherName()+"\n"+
-                        "Email: "+temp.getEmail()+"\n"+
+                String snippet= "Name:  "+temp.getName()+"\n"+
+                        "FatherName:  " + temp.getFatherName()+"\n"+
+                        "Email:  "+temp.getEmail()+"\n"+
                         "Mobile: "+temp.getMobile()+"\n"+
                         "Education: "+temp.getEducation()+"\n"+
-                        "onthlyIncome: "+temp.getMonthlyIncome()+"\n";
+                        "Profession: "+temp.getProfession()+"\n"+
+                        "MonthlyIncome: "+temp.getMonthlyIncome()+"\n";
                 mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
 
                 builder.include(sydney);
@@ -516,6 +523,8 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         marker.showInfoWindow();
+
+        showpersionInfoDialog(marker);
         //handle click here
 
       /*  for (int i=0; i < 5; i++)
@@ -527,6 +536,32 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         /*  }*/
         return  true;
     }
+    private void showpersionInfoDialog(final Marker marker) {
+        final Dialog dialog = new Dialog(MainmapActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.persioninfo_dialog);
+        TextView perDetail = dialog.findViewById(R.id.perDetail);
+        String str=marker.getSnippet().toString();
+
+        perDetail.setText(str);
+        TextView cancelButton = dialog.findViewById(R.id.cancel_button);
+        TextView submitButton = dialog.findViewById(R.id.submit_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        dialog.show();
+    }
+
 
     private void showPersionnavigation(){
         settingLayout.setVisibility(View.VISIBLE);

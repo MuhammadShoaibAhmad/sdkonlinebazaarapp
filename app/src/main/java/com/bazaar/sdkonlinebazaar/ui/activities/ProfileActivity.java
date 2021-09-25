@@ -1,14 +1,24 @@
 package com.bazaar.sdkonlinebazaar.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.loader.content.CursorLoader;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -28,9 +38,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,7 +59,15 @@ public class ProfileActivity extends AppCompatActivity {
     private PersionResponse per;
     private EditText Name, FatherName,Mobile,Profession,Education,Email,Password,Salary,DOBpro;
     private RadioGroup radioGender,radioModules;
-    private RadioButton radioMalepro,radioFemalepro,radioJobpro,radioFoodpro,radioMarriageBureaupro,radioButtonGender,radioButtonModules;;
+    private RadioButton radioMalepro,radioFemalepro,radioJobpro,radioFoodpro,radioMarriageBureaupro,radioButtonGender,radioButtonModules;
+
+    private String imagePath;
+    private ImageView imgView;
+    private static String[] PERMISSSION_STORAGE={
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+    private static final int REQUEST_EXTERNAL_STORAGE=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void bindViews() {
+        verifyStoragePermission(ProfileActivity.this);
         progressDialog = new ProgressDialog(this, Constants.verifyMsg);
 
         per=new PersionResponse();
@@ -68,6 +91,8 @@ public class ProfileActivity extends AppCompatActivity {
         Password = findViewById(R.id.Password);
         Salary = findViewById(R.id.Salary);
         DOBpro = findViewById(R.id.DOBpro);
+
+        imgView = findViewById(R.id.img_profile);
         /*Mobile = findViewById(R.id.Mobile);*/
 
         radioGender = findViewById(R.id.radioGenderpro);
@@ -214,6 +239,8 @@ public class ProfileActivity extends AppCompatActivity {
         per.setPassword(Password.getText().toString());
         per.setMonthlyIncome(Salary.getText().toString());
         per.setModulesTypesID(Constants.ModulesTypesID);
+
+
         // get selected radio button from radioGroup
       /*  int selectedId = radioGender.getCheckedRadioButtonId();
         int moduleId = radioModules.getCheckedRadioButtonId();
@@ -293,6 +320,94 @@ public class ProfileActivity extends AppCompatActivity {
             Utils.showSnackBar(this, "Please Enter All Inputs ..!!");
         }
 */
+    }
+
+
+public void uploadprofileimage(View view){
+    Intent intent = new Intent();
+    intent.setType("image/*");
+    intent.setAction(Intent.ACTION_PICK);
+    Intent result=Intent.createChooser(intent,"choose img");
+    startActivityForResult(result, 10);
+}
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+
+            if (requestCode == 10 && resultCode == RESULT_OK) {
+
+                Uri uri = data.getData();
+                imagePath=getRealPathFromURI(data.getData());
+                imgView.setImageURI(uri);
+            } // When an Video is picked
+            else {
+                Toast.makeText(this, "You haven't picked Image/Video", Toast.LENGTH_LONG).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+
+    private  String getRealPathFromURI(Uri contenturi){
+        String[] proj={MediaStore.Images.Media.DATA};
+        CursorLoader loader=new CursorLoader(getApplicationContext(),contenturi,proj,null,null,null);
+        Cursor cursor=loader.loadInBackground();
+        int column_index=cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        String result=cursor.getString(column_index);
+        return result;
+
+    }
+
+    private void uploadFile() {
+        progressDialog.showProgressDialog();
+
+        // Map is used to multipart the file using okhttp3.RequestBody
+        File file = new File(imagePath);
+
+
+        // Parsing any Media type file
+        RequestBody photoContent = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file.getName(), photoContent);
+
+        RequestBody description = RequestBody.create(MediaType.parse("text/plain"), file.getName());
+
+        Call<RequestBody> getpersionCall = RetrofitClient.getInstance().uploadUserProfilePhoto(photo,description);
+        getpersionCall.enqueue(new Callback<RequestBody>() {
+            @Override
+            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+                RequestBody serverResponse = response.body();
+                if (response.isSuccessful()) {
+
+                    progressDialog.hideProgressDialog();
+                    //assert serverResponse != null;
+                    Log.v("Response", serverResponse.toString());
+                }
+                progressDialog.hideProgressDialog();
+            }
+
+            @Override
+            public void onFailure(Call<RequestBody> call, Throwable t) {
+                progressDialog.hideProgressDialog();
+            }
+        });
+    }
+
+    private  static void  verifyStoragePermission(Activity activity){
+        int permission= ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if(permission != PackageManager.PERMISSION_GRANTED){
+
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSSION_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+
     }
 
 }

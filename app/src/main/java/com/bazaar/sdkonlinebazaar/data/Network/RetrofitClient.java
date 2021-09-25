@@ -7,7 +7,9 @@ import com.bazaar.sdkonlinebazaar.data.responses.PersionTrackingDataResponse;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -16,7 +18,10 @@ import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public class RetrofitClient {
@@ -96,6 +101,17 @@ public class RetrofitClient {
         Call<List<ModulesResponse>> getModulesTypesByModuleIDList(
                 @Query("ModuleID") int moduleID
         );
+
+
+
+  /*      @Multipart
+        @POST("api/file/upload")
+        Call<Void> uploadUserProfilePhoto(@Path MultipartBody.Part photo,
+                                          @Part("description") RequestBody description);
+*/
+        @Multipart
+        @POST("api/file/upload")
+        Call <RequestBody> uploadUserProfilePhoto(@Part MultipartBody.Part photo, @Part("description") RequestBody description);
 /*
 
     @GET("Notification/GetCriticalAlarms")
