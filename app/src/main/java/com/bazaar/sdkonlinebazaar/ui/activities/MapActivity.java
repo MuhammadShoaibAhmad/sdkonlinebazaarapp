@@ -108,7 +108,7 @@ public class MapActivity extends FragmentActivity implements
 
 
         ImageView hamMenu = findViewById(R.id.open_drawer_button);
-        ImageView closeDrawer = findViewById(R.id.close_drawer_button);
+        ImageView closeDrawer = findViewById(R.id.mainprofilepic);
 
 
         hamMenu.setOnClickListener(new View.OnClickListener() {

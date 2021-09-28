@@ -18,7 +18,7 @@
             android:background="@drawable/menubar_gradient">
 
             <ImageView
-                android:id="@+id/close_drawer_button"
+                android:id="@+id/mainprofilepic"
                 android:layout_width="@dimen/_50sdp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

@@ -9,6 +9,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -32,6 +34,8 @@ import com.bazaar.sdkonlinebazaar.data.responses.ModulesResponse;
 import com.bazaar.sdkonlinebazaar.data.responses.PersionResponse;
 import com.bazaar.sdkonlinebazaar.utils.ProgressDialog;
 import com.bazaar.sdkonlinebazaar.utils.Utils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -39,6 +43,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +98,27 @@ public class ProfileActivity extends AppCompatActivity {
         DOBpro = findViewById(R.id.DOBpro);
 
         imgView = findViewById(R.id.img_profile);
+
+        try {
+            //URL url = new URL("http://194.163.144.128:5304/"+Constants.ImagePath);
+
+            if(Constants.ImagePath.contains("")){
+                imgView.setImageResource(R.drawable.icon_profile);
+            }else{
+                Glide.with(this).
+                        load("http://appapis.sdkonlinebazaar.com/"+Constants.ImagePath)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(imgView);
+            }
+
+          /*  imgView.setImageURI(url);*/
+          /*  Bitmap bmp = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            imgView.setImageBitmap(bmp);*/
+        }
+        catch (Exception ex){
+
+        }
+
         /*Mobile = findViewById(R.id.Mobile);*/
 
         radioGender = findViewById(R.id.radioGenderpro);
@@ -341,6 +367,8 @@ public void uploadprofileimage(View view){
                 Uri uri = data.getData();
                 imagePath=getRealPathFromURI(data.getData());
                 imgView.setImageURI(uri);
+
+                uploadFile();
             } // When an Video is picked
             else {
                 Toast.makeText(this, "You haven't picked Image/Video", Toast.LENGTH_LONG).show();
@@ -369,10 +397,11 @@ public void uploadprofileimage(View view){
         // Map is used to multipart the file using okhttp3.RequestBody
         File file = new File(imagePath);
 
-
+        String  imgpath="Content/Uploads/IMG"+Constants.ID +file.getName();
+        String  imgpath2="IMG"+Constants.ID +file.getName();
         // Parsing any Media type file
         RequestBody photoContent = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", file.getName(), photoContent);
+        MultipartBody.Part photo = MultipartBody.Part.createFormData("photo", imgpath2, photoContent);
 
         RequestBody description = RequestBody.create(MediaType.parse("text/plain"), file.getName());
 
@@ -395,8 +424,41 @@ public void uploadprofileimage(View view){
                 progressDialog.hideProgressDialog();
             }
         });
-    }
 
+        updateImagePath(imgpath);
+    }
+    private void updateImagePath(String ImagePath) {
+
+        try{
+
+                int ID=Constants.ID;
+                Call<String> updateResponseCall = RetrofitClient.getInstance().UpdatePersonInfoProfilePic(ID,ImagePath);
+                updateResponseCall.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        progressDialog.hideProgressDialog();
+                        if (response.body() != null) {
+
+                        } else {
+                            Utils.showSnackBar(ProfileActivity.this, "Invalid user ..!!");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+                        progressDialog.hideProgressDialog();
+                        Utils.showSnackBar(ProfileActivity.this, "Something went wrong ..!!");
+                        Log.e("TAG", t.getMessage());
+                    }
+                });
+        }
+        catch (Exception ex){
+
+        }
+
+
+
+    }
     private  static void  verifyStoragePermission(Activity activity){
         int permission= ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if(permission != PackageManager.PERMISSION_GRANTED){
@@ -407,7 +469,6 @@ public void uploadprofileimage(View view){
                     REQUEST_EXTERNAL_STORAGE
             );
         }
-
     }
 
 }

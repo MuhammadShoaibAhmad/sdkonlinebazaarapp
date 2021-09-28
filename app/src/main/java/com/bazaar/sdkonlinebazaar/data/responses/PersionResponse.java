@@ -88,6 +88,11 @@ public class PersionResponse {
     @Expose
     private String dob;
 
+    @SerializedName("ImagePath")
+    @Expose
+    private String imagePath;
+
+
     public Integer getId() {
         return id;
     }
@@ -303,5 +308,13 @@ public class PersionResponse {
 
     public void setDOB(String dob) {
         this.dob = dob;
+    }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 }

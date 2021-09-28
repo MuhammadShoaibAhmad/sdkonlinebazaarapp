@@ -13,6 +13,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,6 +47,8 @@ import com.bazaar.sdkonlinebazaar.utils.BackgroundService;
 import com.bazaar.sdkonlinebazaar.utils.ProgressDialog;
 import com.bazaar.sdkonlinebazaar.utils.Utils;
 import com.bazaar.sdkonlinebazaar.utils.Wherebouts;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.LocationCallback;
@@ -99,7 +103,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
     private int mInterval = 5000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     public final static int SENDING = 1;
-
+private  ImageView mainprofilepic;
     private TextView menuName,menuEmail,menuMobile;
     private PersionResponse per;
 
@@ -192,6 +196,21 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         menuName = findViewById(R.id.menuName);
         menuEmail = findViewById(R.id.menuEmail);
         menuMobile = findViewById(R.id.menuMobile);
+        mainprofilepic = findViewById(R.id.mainprofilepic);
+        try {
+            if(Constants.ImagePath.contains("")){
+                mainprofilepic.setImageResource(R.drawable.icon_profile);
+            }else{
+                Glide.with(this).
+                        load("http://appapis.sdkonlinebazaar.com/"+Constants.ImagePath)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(mainprofilepic);
+            }
+
+        }
+        catch (Exception ex){
+
+        }
         menuName.setText(Constants.Name);
         menuEmail.setText(Constants.Email);
         menuMobile.setText(Constants.Mobile);
@@ -259,7 +278,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         mMap.moveCamera(CameraUpdateFactory.newLatLng(TutorialsPoint));*/
     }
 
-    protected Marker createMarker(double latitude, double longitude,String snippet,String Name,int ID) {
+    protected Marker createMarker(double latitude, double longitude,String snippet,String Name,int ID,String ImagePath) {
 
 
         if (mar != null && !hashMapMarker.isEmpty()) {
@@ -283,6 +302,20 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                     //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_food)));
         }else{*/
+        if(Constants.ID==ID){
+
+            BitmapDrawable bitmapdraw = (BitmapDrawable)getResources().getDrawable(R.drawable.icon_currentloc);
+            Bitmap b = bitmapdraw.getBitmap();
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+            mar = mMap.addMarker(new MarkerOptions()
+                    .position(new LatLng(latitude, longitude))
+                    .anchor(0.5f, 0.5f)
+                    .title(String.valueOf(ID))
+                    .snippet(snippet)
+
+                    .icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+            // .icon(BitmapDescriptorFactory.fromResource(R.drawable.icon_currentloc)));
+        }else {
             mar = mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(latitude, longitude))
                     .anchor(0.5f, 0.5f)
@@ -291,6 +324,8 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
 
                     //.icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_icon)));
+        }
+
       /*  }
 */
 
@@ -436,7 +471,7 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
                         "Education: "+temp.getEducation()+"\n"+
                         "Profession: "+temp.getProfession()+"\n"+
                         "MonthlyIncome: "+temp.getMonthlyIncome()+"\n";
-                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId());
+                mar =createMarker(temp.getLatitude(), temp.getLongitude(),  snippet,temp.getName(),temp.getId(), temp.getImagePath());
 
                 builder.include(sydney);
                 if(Constants.allpersionList.size()==1){
@@ -541,6 +576,33 @@ public class MainmapActivity extends FragmentActivity implements OnMapReadyCallb
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.persioninfo_dialog);
         TextView perDetail = dialog.findViewById(R.id.perDetail);
+        ImageView imgView = dialog.findViewById(R.id.img_profiledialog);
+
+
+        String ImagePath="";
+
+        int ID= Integer.parseInt(marker.getTitle());
+        for (int i = 0; i < Constants.allpersionList.size(); i++) {
+                PersionResponse temp = Constants.allpersionList.get(i);
+                if(ID ==temp.getId()){
+
+                    ImagePath=temp.getImagePath();
+                }
+        }
+        try {
+            if(Constants.ImagePath.contains("")){
+                imgView.setImageResource(R.drawable.icon_profile);
+            }else{
+                Glide.with(this).
+                        load("http://appapis.sdkonlinebazaar.com/"+Constants.ImagePath)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(imgView);
+            }
+
+        }
+        catch (Exception ex){
+
+        }
         String str=marker.getSnippet().toString();
 
         perDetail.setText(str);

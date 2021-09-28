@@ -49,6 +49,7 @@ public class Constants {
     public static int Gender=-1;
     public static String Salary="";
     public static String Password="";
+    public static String ImagePath="";
 
 
 

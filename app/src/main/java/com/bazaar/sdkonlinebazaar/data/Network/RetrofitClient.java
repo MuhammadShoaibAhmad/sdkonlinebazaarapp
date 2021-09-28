@@ -26,7 +26,7 @@ import retrofit2.http.Query;
 
 public class RetrofitClient {
    // private static final String url = "http://"+ Constants.baseurl2 +"/";
-  private static final String url = "http://194.163.144.128:5304/";
+  private static final String url = "http://appapis.sdkonlinebazaar.com/";
 
     public static Api api = null;
 
@@ -96,6 +96,12 @@ public class RetrofitClient {
                 @Query("Longitude") double Longitude
         );
 
+
+        @GET("Main/PersonInfoProfilePic")
+        Call<String> UpdatePersonInfoProfilePic(
+                @Query("ID") int ID,
+                @Query("ImagePath") String ImagePath
+        );
 
         @GET("Main/ModulesTypesByModuleIDList")
         Call<List<ModulesResponse>> getModulesTypesByModuleIDList(

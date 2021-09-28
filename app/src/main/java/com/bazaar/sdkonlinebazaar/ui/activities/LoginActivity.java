@@ -113,6 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                             Constants.Email= signinResponse.getEmail();
                             Constants.Salary= signinResponse.getMonthlyIncome();
                             Constants.Password= signinResponse.getPassword();
+                            Constants.ImagePath= signinResponse.getImagePath();
                         /*    Constants.Latitude= signinResponse.getLatitude();
                             Constants.Longitude= signinResponse.getLongitude();*/
                             progressDialog.hideProgressDialog();
